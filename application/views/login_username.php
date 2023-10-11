@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <title>Login Email</title>
+    <title>Login Username</title>
 </head>
 
 <style>
@@ -35,6 +35,7 @@
         background: #a6d5cd;
         padding: 30px 50px;
         border-top-right-radius: 50px;
+        border-bottom-left-radius: 50px;
     }
 
     .input-group {
@@ -157,10 +158,10 @@
             <div class="container">
                 <h2>Login</h2>
                 <p>Sign in to continue</p>
-                <form action="<?php echo base_url('auth/aksi_login_email') ?>" enctype="multipart/form-data" method="post">
+                <form action="<?php echo base_url('auth/aksi_login_username') ?>" enctype="multipart/form-data" method="post">
                     <div class="input-group">
-                        <input type="email" required name="email">
-                        <span for="">Email</span>
+                        <input type="text" required name="username">
+                        <span for="">Username</span>
                         <b></b>
                     </div>
                     <div class="input-group">
@@ -180,7 +181,7 @@
                         </div>
                     </div>
                     <div class="login_username">
-                        <a href="<?php echo base_url('auth/login_username') ?>">Login with username</a>
+                        <a href="<?php echo base_url('auth/login') ?>">Login with email</a>
                     </div>
                     <div class="sign-in">
                         <button type="submit">Sign In</button>

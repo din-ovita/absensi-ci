@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <title>Login Email</title>
+    <title>Register</title>
 </head>
 
 <style>
@@ -34,7 +34,7 @@
     .box {
         background: #a6d5cd;
         padding: 30px 50px;
-        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
     }
 
     .input-group {
@@ -98,8 +98,8 @@
         z-index: 11;
     }
 
-    .sign-in {
-        padding-top: 10px;
+    .sign-up {
+        padding-top: 30px;
         width: 100%;
     }
 
@@ -116,7 +116,7 @@
         text-align: center;
     }
 
-    .sign-in button {
+    .sign-up button {
         color: #fff;
         font-weight: 600;
         width: 100%;
@@ -136,31 +136,33 @@
     .box form p a {
         color: #fff;
     }
-
-    .login_username {
-        margin-top: 50px;
-    }
-
-    .login_username a {
-        text-decoration: none;
-        color: #fff;
-    }
-
-    .login_username a:hover {
-        text-decoration: underline;
-    }
 </style>
 
 <body>
     <section>
         <div class="box">
             <div class="container">
-                <h2>Login</h2>
-                <p>Sign in to continue</p>
-                <form action="<?php echo base_url('auth/aksi_login_email') ?>" enctype="multipart/form-data" method="post">
+                <h2>Register</h2>
+                <p>Create an Account</p>
+                <form action="<?php echo base_url('auth/aksi_register') ?>" enctype="multipart/form-data" method="post">
+                    <div class="input-group">
+                        <input type="text" required name="username">
+                        <span for="">Username</span>
+                        <b></b>
+                    </div>
                     <div class="input-group">
                         <input type="email" required name="email">
                         <span for="">Email</span>
+                        <b></b>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" required name="nama_depan">
+                        <span for="">First Name</span>
+                        <b></b>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" required name="nama_belakang">
+                        <span for="">Last Name</span>
                         <b></b>
                     </div>
                     <div class="input-group">
@@ -171,21 +173,10 @@
                             <i class="fas fa-eye-slash" onclick="togglePassword()" id="icon"></i>
                         </div>
                     </div>
-                    <div class="input-group">
-                        <input type="password" id="password2" required name="confirm_password">
-                        <span for="">Confirm Password</span>
-                        <b></b>
-                        <div class="password">
-                            <i class="fas fa-eye-slash" onclick="togglePassword2()" id="icon2"></i>
-                        </div>
+                    <div class="sign-up">
+                        <button type="submit">Sign Up</button>
                     </div>
-                    <div class="login_username">
-                        <a href="<?php echo base_url('auth/login_username') ?>">Login with username</a>
-                    </div>
-                    <div class="sign-in">
-                        <button type="submit">Sign In</button>
-                    </div>
-                    <p>Don't have account? <a href="<?php echo base_url('auth/register') ?>">Register</a></p>
+                    <p>Already have an account? <a href="<?php echo base_url('auth/login') ?>">Login</a></p>
                 </form>
             </div>
         </div>
@@ -194,20 +185,6 @@
         function togglePassword() {
             var passwordType = document.getElementById("password");
             var icon = document.getElementById("icon");
-            if (passwordType.type === "password") {
-                passwordType.type = "text";
-                icon.classList.remove("fa-eye-slash");
-                icon.classList.add("fa-eye");
-            } else {
-                passwordType.type = "password";
-                icon.classList.remove("fa-eye");
-                icon.classList.add("fa-eye-slash");
-            }
-        }
-
-        function togglePassword2() {
-            var passwordType = document.getElementById("password2");
-            var icon = document.getElementById("icon2");
             if (passwordType.type === "password") {
                 passwordType.type = "text";
                 icon.classList.remove("fa-eye-slash");
