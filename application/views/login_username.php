@@ -128,6 +128,10 @@
         font-size: 1.05em;
     }
 
+    .sign-in button:focus {
+        outline: none;
+    }
+
     .box form p {
         font-size: 0.95em;
         text-align: left;
@@ -136,6 +140,7 @@
 
     .box form p a {
         color: #fff;
+        outline: none;
     }
 
     .login_username {
@@ -145,6 +150,7 @@
     .login_username a {
         text-decoration: none;
         color: #fff;
+        outline: none;
     }
 
     .login_username a:hover {

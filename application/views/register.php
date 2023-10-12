@@ -127,6 +127,10 @@
         font-size: 1.05em;
     }
 
+    .sign-up button:focus {
+        outline: none;
+    }
+
     .box form p {
         font-size: 0.95em;
         text-align: left;
@@ -135,6 +139,7 @@
 
     .box form p a {
         color: #fff;
+        outline: none;
     }
 </style>
 
