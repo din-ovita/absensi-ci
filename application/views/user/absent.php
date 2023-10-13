@@ -17,7 +17,7 @@
 
     section {
         margin-left: 0;
-        margin-top: 4rem;
+        margin-top: 5rem;
         padding: 1rem 2rem;
         display: flex;
         justify-content: center;
@@ -56,6 +56,7 @@
         text-transform: capitalize;
         margin-bottom: 1rem;
         font-size: 1.3em;
+        color: #314641;
     }
 
     section form button {
@@ -73,7 +74,7 @@
     @media (min-width: 1200px) {
         section {
             margin-left: 14rem;
-            margin-top: 4rem;
+            margin-top: 5rem;
         }
 
         section form div {
@@ -116,31 +117,28 @@
         <form action="<?php echo base_url('user/aksi_absen') ?>" method="post">
             <h1>Absent</h1>
             <?php if ($data) : ?>
-                <?php if ($data1) : ?>
-                    <?php foreach ($data1 as $row) : ?>
+                <?php foreach ($data as $row) : ?>
+                    <?php if ($row->keterangan_izin == '-') : ?>
                         <div>
                             <h2>daily activities</h2>
                             <textarea name="kegiatan" id="" cols="30" rows="10" placeholder="Your daily activities"><?php echo $row->kegiatan ?></textarea>
                             <button type="submit">Update</button>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $row->id ?>">
-                    <?php endforeach ?>
-                <?php else : ?>
-                    <div>
-                        <h2>daily activities</h2>
-                        <textarea name="kegiatan" id="" cols="30" rows="10" placeholder="Your daily activities"></textarea>
-                        <button type="disable">Update</button>
-                    </div>
-                <?php endif ?>
+                    <?php else : ?>
+                        <div>
+                            <h2>daily activities</h2>
+                            <textarea name="kegiatan" id="" cols="30" rows="10" placeholder="Your daily activities"><?php echo $row->kegiatan ?></textarea>
+                            <button type="button" disabled>Save</button>
+                        </div>
+                        <input type="hidden" name="id" value="<?php echo $row->id ?>">
+                    <?php endif ?>
+                <?php endforeach ?>
             <?php else : ?>
                 <div>
                     <h2>daily activities</h2>
                     <textarea name="kegiatan" id="" cols="30" rows="10" placeholder="Your daily activities"></textarea>
-                    <?php if ($data1) : ?>
-                        <button type="disable">Save</button>
-                    <?php else : ?>
-                        <button type="submit">Save</button>
-                    <?php endif ?>
+                    <button type="submit">Save</button>
                 </div>
             <?php endif ?>
         </form>

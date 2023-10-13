@@ -17,7 +17,7 @@
 
     section {
         margin-left: 0;
-        margin-top: 4rem;
+        margin-top: 5rem;
         padding: 1rem 2rem;
         display: flex;
         justify-content: center;
@@ -50,6 +50,7 @@
     section .card2 table thead tr {
         background: #f4f4f4;
         text-align: center;
+        color: #314641;
     }
 
     section .card2 table tbody tr {
@@ -103,7 +104,7 @@
     @media (min-width: 1200px) {
         section {
             margin-left: 14rem;
-            margin-top: 4rem;
+            margin-top: 5rem;
         }
 
         section .card2 {
@@ -201,9 +202,9 @@
                                 <td><?php echo $row->jam_pulang ?></td>
                                 <td><?php echo $row->keterangan_izin ?></td>
                                 <td class="aksi">
-                                    <button onclick="edit()"><i class="fas fa-edit"></i></button>
-                                    <?php foreach ($data as $row) : ?>
-                                        <?php if (empty($row->jam_pulang)) : ?>
+                                    <a href="<?php echo base_url('user/validasi_edit') ?>"><i class="fas fa-edit"></i></a>
+                                    <?php foreach ($data as $row1) : ?>
+                                        <?php if (empty($row1->jam_pulang) && $row1->keterangan_izin == '-') : ?>
                                             <a href="<?php echo base_url('user/pulang') ?>"><i class="fas fa-home"></i></a>
                                         <?php else : ?>
                                             <a href="" style="cursor:default; color: #4b5563;"><i class="fas fa-home"></i></a>
@@ -231,11 +232,12 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'Your data has been deleted.',
+                        icon: 'success',
+                        showConfirmButton: false
+                    })
                 }
 
                 setTimeout(function() {

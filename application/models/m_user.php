@@ -13,6 +13,11 @@ class M_user extends CI_Model
         return $data;
     }
 
+    public function get_by_id($tabel, $id)
+    {
+        $data = $this->db->where('id', $id)->get($tabel);
+        return $data;
+    }
 
     public function add($table, $data)
     {

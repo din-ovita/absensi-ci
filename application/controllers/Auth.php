@@ -37,7 +37,7 @@ class Auth extends CI_Controller
 			'nama_belakang' => $this->input->post('nama_belakang'),
 			'password' => $password,
 			'role' => 'karyawan',
-			'image' => 'user.png'
+			'image' => 'user_picture.jpg'
 		];
 		$email = ['email' => $this->input->post('email')];
 		$query = $this->m_user->cek('user', $email);

@@ -31,7 +31,7 @@
             top: 0;
             width: 80%;
             margin-left: 14rem;
-            padding: 0.5rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -52,6 +52,6 @@
 <div class="nav">
     <h2><i class="fas fa-project-diagram"></i> preSent.</h2>
     <div class="profile">
-        <a href=""><img src="<?php echo base_url('images/user.png') ?>" alt=""></a>
+        <a href="<?php echo base_url('user/profile') ?>"><img src="<?php echo base_url('images/user_picture.jpg') ?>" alt=""></a>
     </div>
 </div>

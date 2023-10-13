@@ -17,7 +17,7 @@
 
     section {
         margin-left: 0;
-        margin-top: 4rem;
+        margin-top: 5rem;
         padding: 1rem 2rem;
         display: flex;
         justify-content: center;
@@ -56,6 +56,7 @@
         text-transform: capitalize;
         margin-bottom: 1rem;
         font-size: 1.3em;
+        color: #314641;
     }
 
     section form button {
@@ -73,7 +74,7 @@
     @media (min-width: 1200px) {
         section {
             margin-left: 14rem;
-            margin-top: 4rem;
+            margin-top: 5rem;
         }
 
         section form div {
@@ -117,26 +118,26 @@
             <h1>Permission</h1>
             <?php if ($data) : ?>
                 <?php foreach ($data as $row) : ?>
-                    <div>
-                        <h2>permission information</h2>
-                        <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"><?php echo $row->keterangan_izin ?></textarea>
-                        <button type="submit">Update</button>
-                    </div>
+                    <?php if (empty($row->jam_masuk)) : ?>
+                        <div>
+                            <h2>permission information</h2>
+                            <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"><?php echo $row->keterangan_izin ?></textarea>
+                            <button type="submit">Update</button>
+                        </div>
+                    <?php else : ?>
+                        <div>
+                            <h2>permission information</h2>
+                            <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"></textarea>
+                            <button type="button" disabled>Save</button>
+                        </div>
+                    <?php endif ?>
                 <?php endforeach ?>
             <?php else : ?>
-                <?php if ($data1) : ?>
-                    <div>
-                        <h2>permission information</h2>
-                        <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"></textarea>
-                        <button type="disable">Save</button>
-                    </div>
-                <?php else : ?>
-                    <div>
-                        <h2>permission information</h2>
-                        <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"></textarea>
-                        <button type="submit">Save</button>
-                    </div>
-                <?php endif ?>
+                <div>
+                    <h2>permission information</h2>
+                    <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"></textarea>
+                    <button type="submit">Save</button>
+                </div>
             <?php endif ?>
         </form>
     </section>
