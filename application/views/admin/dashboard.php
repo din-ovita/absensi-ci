@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
     <?php $this->load->view('style/head') ?>
-    <title>User</title>
 </head>
 
 <style>
@@ -14,6 +14,10 @@
         padding: 0;
         font-family: 'Montserrat', sans-serif;
         position: relative;
+    }
+
+    .style {
+        z-index: 20;
     }
 
     section {
@@ -99,8 +103,6 @@
         font-size: 0.8em;
     }
 
-
-
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -110,8 +112,8 @@
         section .box {
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 4rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2rem;
         }
 
         section .box .card {
@@ -168,41 +170,69 @@
             padding: 1rem 2rem;
         }
 
+        .img img {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .card2 h1 {
+            text-transform: capitalize;
+            margin-bottom: 2rem;
+            color: #314641;
+        }
+
     }
 
-    .style {
-        z-index: 20;
+    .card2 h1 {
+        text-transform: capitalize;
+        margin-bottom: 1rem;
+        color: #314641;
+        font-size: 1.3em;
+    }
+
+    .img img {
+        width: 3.5rem;
+        height: 3.5rem;
     }
 </style>
 
 <body>
     <div class="style">
-        <?php $this->load->view('style/sidebar') ?>
+        <?php $this->load->view('style/sidebar_admin') ?>
         <?php $this->load->view('style/navbar') ?>
     </div>
     <section>
         <div class="box">
             <div class="card">
                 <div>
-                    <h3>total attendance</h3>
-                    <p><?php echo $total_absen ?></p>
+                    <h3>total Employee</h3>
+                    <p><?php echo $total_karyawan ?></p>
+                </div>
+                <i class="fas fa-database"></i>
+            </div>
+            <div class="card">
+                <div>
+                    <h3>total attendance today</h3>
+                    <p><?php echo $total_absen_today ?></p>
                 </div>
                 <i class="fas fa-chart-bar"></i>
             </div>
             <div class="card">
                 <div>
-                    <h3>total permissions</h3>
-                    <p><?php echo $total_izin ?></p>
+                    <h3>total permissions today</h3>
+                    <p><?php echo $total_izin_today ?></p>
                 </div>
                 <i class="fas fa-minus-circle"></i>
             </div>
         </div>
         <div class="box2">
             <div class="card2">
+                <h1>history absent today</h1>
                 <table>
                     <thead>
                         <tr>
                             <th style="width: 5%;">No </th>
+                            <th>Name</th>
                             <th>Date</th>
                             <th>Entry Time</th>
                             <th>Daily Activities</th>
@@ -211,22 +241,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 0;
-                        foreach ($absensi as $row) : $no++ ?>
+                        <?php if ($absensi) : ?>
+                            <?php $no = 0;
+                            foreach ($absensi as $row) : $no++ ?>
+                                <tr>
+                                    <td style="text-align: center;"><?php echo $no ?> </td>
+                                    <td><?php echo name($row->id_karyawan) ?></td>
+                                    <td><?php echo $row->date ?></td>
+                                    <td><?php echo $row->jam_masuk ?></td>
+                                    <td><?php echo $row->kegiatan ?></td>
+                                    <td><?php echo $row->jam_pulang ?></td>
+                                    <td><?php echo $row->keterangan_izin ?></td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else : ?>
                             <tr>
-                                <td style="text-align: center;"><?php echo $no ?> </td>
-                                <td><?php echo $row->date ?></td>
-                                <td><?php echo $row->jam_masuk ?></td>
-                                <td><?php echo $row->kegiatan ?></td>
-                                <td><?php echo $row->jam_pulang ?></td>
-                                <td><?php echo $row->keterangan_izin ?></td>
+                                <td colspan="7">No Data</td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+
 </body>
 
 </html>

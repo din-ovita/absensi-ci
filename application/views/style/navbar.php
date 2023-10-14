@@ -12,6 +12,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background: #fff;
     }
 
     .nav h2 {
@@ -29,8 +30,8 @@
         .nav {
             position: fixed;
             top: 0;
-            width: 80%;
-            margin-left: 14rem;
+            width: 78%;
+            margin-left: 15rem;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;

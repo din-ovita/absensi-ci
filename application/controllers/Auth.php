@@ -70,7 +70,11 @@ class Auth extends CI_Controller
 			$data_session['login'] = "login";
 			$this->session->set_userdata($data_session);
 			$this->session->set_userdata('login', $data_session);
-			redirect(base_url('user'));
+			if ($res['role'] == 'admin') {
+				redirect(base_url('admin'));
+			} else {
+				redirect(base_url('user'));
+			}
 		} else {
 			redirect(base_url('auth/login'));
 		}

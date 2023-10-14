@@ -73,7 +73,7 @@
 
     @media (min-width: 1200px) {
         section {
-            margin-left: 14rem;
+            margin-left: 15rem;
             margin-top: 5rem;
         }
 

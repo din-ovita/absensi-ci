@@ -159,17 +159,20 @@
 <nav>
     <ul>
         <li class="<?= $menu == 'dashboard' ? 'active' : '' ?>">
-            <a href="<?php echo base_url('user') ?>"> <i class="fas fa-palette"></i> <span>Dashboard</span>
+            <a href="<?php echo base_url('admin') ?>"> <i class="fas fa-palette"></i> <span>Dashboard</span>
             </a>
         </li>
-        <li class="<?= $menu == 'absent' ? 'active' : '' ?>">
-            <a href="<?php echo base_url('user/absent') ?>"><i class="fas fa-chart-bar"></i> <span>Absent</span></a>
+        <li class="<?= $menu == 'table' ? 'active' : '' ?>">
+            <a href="<?php echo base_url('admin/data_karyawan') ?>"><i class="fas fa-database"></i> <span>Employee</span></a>
         </li>
-        <li class="<?= $menu == 'history' ? 'active' : '' ?>">
-            <a href="<?php echo base_url('user/history') ?>"><i class="fas fa-history"></i> <span>History</span></a>
+        <li class="<?= $menu == 'daily_rekap' ? 'active' : '' ?>">
+            <a href="<?php echo base_url('admin/daily_rekap') ?>"><i class="fas fa-calendar-day"></i> <span>Daily Recap </span></a>
         </li>
-        <li class="<?= $menu == 'permission' ? 'active' : '' ?>">
-            <a href="<?php echo base_url('user/permission') ?>"><i class="fas fa-minus-circle"></i><span>Permission</span></a>
+        <li class="<?= $menu == 'weekly_rekap' ? 'active' : '' ?>">
+            <a href="<?php echo base_url('admin/weekly_rekap') ?>"><i class="fas fa-calendar-week"></i> <span>Weekly Recap </span></a>
+        </li>
+        <li class="<?= $menu == 'monthly_rekap' ? 'active' : '' ?>">
+            <a href="<?php echo base_url('admin/monthly_rekap') ?>"><i class="fas fa-calendar"></i> <span>Monthly Recap </span></a>
         </li>
     </ul>
     <div class="logout">

@@ -13,6 +13,7 @@
         margin: 0;
         padding: 0;
         font-family: 'Montserrat', sans-serif;
+        position: relative;
     }
 
     section {
@@ -22,6 +23,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 10;
     }
 
     section .card {
@@ -101,9 +103,36 @@
         background: transparent;
     }
 
+    .aksi {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+    }
+
+    .aksi a {
+        text-decoration: none;
+        font-size: 1.5em;
+    }
+
+    .aksi a:nth-child(1) {
+        color: #2563eb;
+    }
+
+    .aksi a:nth-child(2) {
+        color: #16a34a;
+    }
+
+    .aksi button {
+        font-size: 1.5em;
+        border: none;
+        color: #dc2626;
+        background: transparent;
+    }
+
     @media (min-width: 1200px) {
         section {
-            margin-left: 14rem;
+            margin-left: 15rem;
             margin-top: 5rem;
         }
 
@@ -169,11 +198,17 @@
             background: transparent;
         }
     }
+
+    .style {
+        z-index: 20;
+    }
 </style>
 
 <body>
-    <?php $this->load->view('style/sidebar') ?>
-    <?php $this->load->view('style/navbar') ?>
+    <div class="style">
+        <?php $this->load->view('style/sidebar') ?>
+        <?php $this->load->view('style/navbar') ?>
+    </div>
 
     <section>
         <div class="card">

@@ -33,6 +33,10 @@ class User extends CI_Controller
         $where = ['id_karyawan' => $this->session->userdata('id')];
         $query = $this->m_user->cek('absensi', $where);
         $data['absensi'] = $query->result();
+
+        $data['total_absen'] = $this->m_user->total_absent($this->session->userdata('id'));
+        $data['total_izin'] = $this->m_user->total_izin($this->session->userdata('id'));
+
         $this->load->view('user/dashboard_user', $data);
     }
 
@@ -42,7 +46,7 @@ class User extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $date = date('Y-m-d');
 
-        $where = ['date' => $date];
+        $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
         $data['data'] = $this->m_user->get_data('absensi', $where)->result();
         $this->load->view('user/absent', $data);
     }
@@ -55,24 +59,24 @@ class User extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $date = date('Y-m-d');
 
-        $where = ['date' => $date];
+        $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
         $data['data'] = $this->m_user->get_data('absensi', $where)->result();
-        $result = $this->m_user->get_data('absensi', $where)->row_array();
+        // $result = $this->m_user->get_data('absensi', $where)->row_array();
 
-        if ($result['jam_pulang'] === null) {
-            $currentTimestamp = time();
+        // if ($result['jam_pulang'] === null) {
+        //     $currentTimestamp = time();
 
-            $startOfDayTimestamp = strtotime('tomorrow');
+        //     $startOfDayTimestamp = strtotime('tomorrow');
 
-            if ($currentTimestamp > $startOfDayTimestamp) {
-                $data1 = [
-                    'jam_pulang' => '00:00:00',
-                    'status' => 'done'
-                ];
+        //     if ($currentTimestamp > $startOfDayTimestamp) {
+        //         $data1 = [
+        //             'jam_pulang' => '00:00:00',
+        //             'status' => 'done'
+        //         ];
 
-                $this->m_user->update('absensi', $data1, array('id' => $result['id']));
-            }
-        }
+        //         $this->m_user->update('absensi', $data1, array('id' => $result['id']));
+        //     }
+        // }
 
         $this->load->view('user/history', $data);
     }
@@ -82,7 +86,7 @@ class User extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $date = date('Y-m-d');
 
-        $where = ['date' => $date];
+        $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
         $data['data'] = $this->m_user->get_data('absensi', $where)->result();
         $this->load->view('user/permission', $data);
     }
@@ -144,6 +148,7 @@ class User extends CI_Controller
             'id_karyawan' => $this->session->userdata('id'),
             'keterangan_izin' => $this->input->post('izin'),
             'date' => $date,
+            'status' => 'done'
         ];
 
         $data = ['id_karyawan' => $this->session->userdata('id')];
@@ -223,9 +228,6 @@ class User extends CI_Controller
         $query = $this->m_user->cek('user', $data1);
         $res = $query->row_array();
 
-        // var_dump($res);
-
-
         if ($image[0] == false) {
             $data2 = [
                 'username' => $username,
@@ -253,12 +255,35 @@ class User extends CI_Controller
         }
     }
 
+    public function aksi_change_password()
+    {
+        $new_password = $this->input->post('new_password');
+        $confirm_password = $this->input->post('confirm_password');
+
+        if (!empty($new_password)) {
+            if ($new_password === $confirm_password) {
+                $data['password'] = md5($new_password);
+            } else {
+                $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama!');
+                redirect(base_url('admin/akun'));
+            }
+        }
+
+        $result = $this->m_user->update('user', $data, array('id' => $this->input->post('id')));
+
+        if ($result) {
+            redirect(base_url('user/profile'));
+        } else {
+            redirect(base_url('user/profile'));
+        }
+    }
+
     public function validasi_edit()
     {
         date_default_timezone_set('Asia/Jakarta');
         $date = date('Y-m-d');
 
-        $where = ['date' => $date];
+        $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
         $result = $this->m_user->get_data('absensi', $where)->row_array();
 
         if ($result['keterangan_izin'] != '-') {

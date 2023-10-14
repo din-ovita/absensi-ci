@@ -41,4 +41,43 @@ class M_user extends CI_Model
         $data = $this->db->update($tabel, $data, $where);
         return $this->db->affected_rows();
     }
+
+    public function total_absent($id)
+    {
+        return $this->db->where('keterangan_izin', '-')->where('id_karyawan', $id)->get('absensi')->num_rows();
+    }
+
+    public function total_izin($id)
+    {
+        return $this->db->where('jam_masuk', null)->where('status', 'done')->where('id_karyawan', $id)->get('absensi')->num_rows();
+    }
+
+    public function total_absent_today($today)
+    {
+        return $this->db->where('keterangan_izin', '-')->where('date', $today)->get('absensi')->num_rows();
+    }
+
+    public function total_izin_today($today)
+    {
+        return $this->db->where('jam_masuk', null)->where('status', 'done')->where('date', $today)->get('absensi')->num_rows();
+    }
+
+    public function total_karyawan()
+    {
+        return $this->db->where('role', 'karyawan')->get('user')->num_rows();
+    }
+
+    public function getAbsensiLast7Days()
+    {
+        $this->load->database();
+        $end_date = date('Y-m-d');
+        $start_date = date('Y-m-d', strtotime('-7 days', strtotime($end_date)));
+        $query = $this->db->select('id_karyawan, date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status, COUNT(*) AS total_absences')
+            ->from('absensi')
+            ->where('date >=', $start_date)
+            ->where('date <=', $end_date)
+            ->group_by('date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status')
+            ->get();
+        return $query->result_array();
+    }
 }
