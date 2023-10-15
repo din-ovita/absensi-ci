@@ -41,7 +41,7 @@
         justify-content: space-between;
         align-items: center;
         background: #a6d5cd;
-        padding: 0.75rem 2rem;
+        padding: 0.75rem 1rem;
     }
 
     section .card h1 {
@@ -118,6 +118,11 @@
             font-size: 0.9em;
         }
 
+        form {
+            padding: 0.75rem 2rem;
+        }
+
+
         form input {
             padding: 0.5rem;
             background: #f4f4f4;
@@ -133,6 +138,15 @@
             padding: 0.5rem 1.5rem;
             font-size: 1em;
         }
+    }
+
+    form button {
+        color: #fff;
+        background: #c7e4df;
+        border: none;
+        margin-left: 0;
+        padding: 0.5rem 1.5rem;
+        font-size: 1em;
     }
 </style>
 

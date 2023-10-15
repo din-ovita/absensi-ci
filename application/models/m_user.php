@@ -80,4 +80,36 @@ class M_user extends CI_Model
             ->get();
         return $query->result_array();
     }
+
+    public function getbulanan($bulan)
+    {
+        $this->db->from('absensi');
+        $this->db->where("DATE_FORMAT(absensi.date, '%Y-%m') =", $bulan);
+        $db = $this->db->get();
+        $result = $db->result();
+        return $result;
+    }
+
+    public function getharian($hari)
+    {
+        $this->db->from('absensi');
+        $this->db->where("DATE_FORMAT(absensi.date, '%Y-%m-%d') =", $hari);
+        $db = $this->db->get();
+        $result = $db->result();
+        return $result;
+    }
+
+    // pp
+
+    public function get_items($limit, $offset, $role)
+    {
+        $this->db->limit($limit, $offset);
+        $query = $this->db->where('role', $role)->get('user');
+        return $query->result();
+    }
+
+    public function count_items($role)
+    {
+        return $this->db->where('role', $role)->get('user')->num_rows();
+    }
 }

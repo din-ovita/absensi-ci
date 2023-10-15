@@ -9,3 +9,25 @@ function name($id)
         return $stmt;
     }
 }
+
+function pulang($id)
+{
+    $ci = &get_instance();
+    $ci->load->database();
+    $result = $ci->db->where('id', $id)->get('absensi');
+    foreach ($result->result() as $c) {
+        $stmt = $c->jam_pulang;
+        return $stmt;
+    }
+}
+
+function izin($id)
+{
+    $ci = &get_instance();
+    $ci->load->database();
+    $result = $ci->db->where('id', $id)->get('absensi');
+    foreach ($result->result() as $c) {
+        $stmt = $c->keterangan_izin;
+        return $stmt;
+    }
+}

@@ -34,8 +34,13 @@
 
     section .card h1 {
         color: #fff;
+    }
+
+    section .card .header {
         background: #a6d5cd;
         padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
     }
 
     section .card2 {
@@ -71,6 +76,15 @@
 
     section .card2 table tbody tr td {
         font-size: 0.8em;
+    }
+
+    button {
+        color: #fff;
+        background: #c7e4df;
+        border: none;
+        margin-left: 1rem;
+        padding: 0.5rem 1.5rem;
+        font-size: 1em;
     }
 
     @media (min-width: 1200px) {
@@ -110,13 +124,47 @@
 
         section .card h1 {
             color: #fff;
-            background: #a6d5cd;
-            padding: 1rem 2rem;
         }
 
         .img img {
             width: 4rem;
             height: 4rem;
+        }
+
+        section .card .header {
+            padding: 0.75rem 2rem;
+        }
+
+        /*  */
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Pagination links */
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 2px;
+            border: 1px solid #ddd;
+            background-color: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        /* Current page link */
+        .pagination .active a {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Disabled page link (for previous and next buttons) */
+        .pagination .disabled a {
+            pointer-events: none;
+            cursor: default;
+            color: #ccc;
         }
     }
 
@@ -138,7 +186,10 @@
     </div>
     <section>
         <div class="card">
-            <h1>Employee Data</h1>
+            <div class="header">
+                <h1>Employee Data</h1>
+                <button onclick="export_karyawan()">Export</button>
+            </div>
             <div class="card2">
                 <table>
                     <thead>
@@ -168,9 +219,20 @@
                         <?php endif ?>
                     </tbody>
                 </table>
+
+                <div class="pagination">
+                    <?php echo $pagination_links; ?>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <script>
+        function export_karyawan() {
+            window.location.href = '<?php echo base_url('admin/export_karyawan') ?>';
+        }
+    </script>
 
 </body>
 

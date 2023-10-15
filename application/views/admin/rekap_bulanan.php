@@ -41,7 +41,7 @@
         justify-content: space-between;
         align-items: center;
         background: #a6d5cd;
-        padding: 0.75rem 2rem;
+        padding: 0.75rem 1rem;
     }
 
     section .card h1 {
@@ -133,6 +133,41 @@
             padding: 0.5rem 1.5rem;
             font-size: 1em;
         }
+
+        .export {
+            margin: 1rem 2rem 0 2rem;
+        }
+
+        form {
+            padding: 0.75rem 2rem;
+        }
+
+        button.export {
+            margin: 1rem 2rem;
+        }
+
+    }
+
+
+    form input {
+        padding: 0.5rem;
+        background: #f4f4f4;
+        border: 1px solid #a6d5cd;
+        margin-top: 0.5rem;
+    }
+
+    button {
+        color: #fff;
+        background: #c7e4df;
+        border: none;
+        margin-top: 0.5rem;
+        margin-left: 0.4rem;
+        padding: 0.5rem 1rem;
+        font-size: 1em;
+    }
+
+    .export {
+        margin: 1rem 1rem 0 1rem;
     }
 </style>
 
@@ -145,14 +180,14 @@
     <section>
         <div class="box">
             <div class="card">
-                <form action="<?php echo base_url('admin/export_month') ?>" method="post">
-                    <h1>Weekly Recap</h1>
-                    <button onclick="export_today()">Export</button>
-                    <!-- <div>
-                        <input type="date" name="date">
-                        <button type="submit">Export</button>
-                    </div> -->
+                <form action="<?php echo base_url('admin/monthly_rekap') ?>" method="post">
+                    <h1>Monthly Recap</h1>
+                    <div style="display: flex; align-items: center;">
+                        <input type="month" name="month" id="bulan">
+                        <button type="submit">Show</button>
+                    </div>
                 </form>
+                <button class="export" onclick="export_month()">Export</button>
                 <div class="card2">
                     <table>
                         <thead>
@@ -193,8 +228,14 @@
     </section>
 
     <script>
+        document.getElementById('bulan').addEventListener('change', function() {
+            sessionStorage.setItem('bulan', this.value);
+        });
+
         function export_month() {
-            window.location.href = '<?php echo base_url('admin/export_month') ?>';
+
+            var bulan = sessionStorage.getItem('bulan');
+            window.location.href = '<?php echo base_url('admin/export_monthly_input/') ?>' + bulan;
         }
     </script>
 

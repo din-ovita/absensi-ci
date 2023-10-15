@@ -30,13 +30,38 @@ class Admin extends CI_Controller
         $data['total_karyawan'] =  $this->m_user->total_karyawan();
         $this->load->view('admin/dashboard', $data);
     }
-    public function data_karyawan()
+
+    // public function data_karyawan()
+    // {
+    //     $data = ['menu' => 'table'];
+    //     $data1 = ['role' => 'karyawan'];
+    //     $data['karyawan'] = $this->m_user->get_data('user', $data1)->result();
+    //     $this->load->view('admin/data_karyawan', $data);
+    // }
+
+    public function data_karyawan($page = 1)
     {
+        $per_page = 10;
         $data = ['menu' => 'table'];
-        $data1 = ['role' => 'karyawan'];
-        $data['karyawan'] = $this->m_user->get_data('user', $data1)->result();
+        $data['karyawan'] = $this->m_user->get_items($per_page, $per_page * ($page - 1), 'karyawan');
+
+        $total_rows = $this->m_user->count_items('karyawan');
+        $config['base_url'] = base_url('admin/data_karyawan');
+        $config['total_rows'] = $total_rows;
+        $config['per_page'] = $per_page;
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 2;
+        $config['use_page_numbers'] = TRUE;
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data['pagination_links'] = $this->pagination->create_links();
+
         $this->load->view('admin/data_karyawan', $data);
     }
+
+
     public function rekap()
     {
         $data = ['menu' => 'rekap'];
@@ -44,12 +69,9 @@ class Admin extends CI_Controller
     }
     public function daily_rekap()
     {
-        date_default_timezone_set('Asia/Jakarta');
-        $date = date('Y-m-d');
-
         $data = ['menu' => 'daily_rekap'];
-        $data1 = ['date' => $date];
-        $data['absent'] = $this->m_user->get_data('absensi', $data1)->result();
+        $hari = $this->input->post('date');
+        $data['absent'] = $this->m_user->getharian($hari);
 
         $this->load->view('admin/rekap_harian', $data);
     }
@@ -61,14 +83,9 @@ class Admin extends CI_Controller
     }
     public function monthly_rekap()
     {
-        date_default_timezone_set('Asia/Jakarta');
-        $date = date('Y-m');
-
         $data = ['menu' => 'monthly_rekap'];
-        $data1 = ['MONTH(date)' => $date];
-        $data['absensi'] = $this->m_user->get_data('absensi', $data1)->result();
-
-
+        $bulan = $this->input->post('month');
+        $data['absensi'] = $this->m_user->getbulanan($bulan);
         $this->load->view('admin/rekap_bulanan', $data);
     }
 
@@ -381,10 +398,102 @@ class Admin extends CI_Controller
         $writer->save('php://output');
     }
 
-    public function export_daily_input()
+    public function export_karyawan()
     {
         require_once FCPATH . 'vendor/autoload.php';
-        $date = $this->input->post('date');
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $style_col = [
+            'font' => ['bold' => true],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            ]
+        ];
+
+        $style_row = [
+            'alignment' => [
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+            ],
+            'borders' => [
+                'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            ]
+        ];
+
+        $sheet->setCellValue('A1', "EMPLOYEE DATA");
+        $sheet->mergeCells('A1:E1');
+        $sheet->getStyle('A1')->getFont()->setBold(true);
+
+        $sheet->setCellValue('A3', "NO");
+        $sheet->setCellValue('B3', "USERNAME");
+        $sheet->setCellValue('C3', "EMAIL");
+        $sheet->setCellValue('D3', "FIRST NAME");
+        $sheet->setCellValue('E3', "LAST NAME");
+
+        $sheet->getStyle('A3')->applyFromArray($style_col);
+        $sheet->getStyle('B3')->applyFromArray($style_col);
+        $sheet->getStyle('C3')->applyFromArray($style_col);
+        $sheet->getStyle('D3')->applyFromArray($style_col);
+        $sheet->getStyle('E3')->applyFromArray($style_col);
+
+        $where = ['role' => 'karyawan'];
+        $karyawan = $this->m_user->get_data('user', $where)->result();
+
+        $no = 1;
+        $numrow = 4;
+
+        foreach ($karyawan as $data) {
+            $sheet->setCellValue('A' . $numrow, $no);
+            $sheet->setCellValue('B' . $numrow, $data->username);
+            $sheet->setCellValue('C' . $numrow, $data->email);
+            $sheet->setCellValue('D' . $numrow, $data->nama_depan);
+            $sheet->setCellValue('E' . $numrow, $data->nama_belakang);
+
+            $sheet->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('E' . $numrow)->applyFromArray($style_row);
+
+            $no++;
+            $numrow++;
+        }
+
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(25);
+        $sheet->getColumnDimension('C')->setWidth(25);
+        $sheet->getColumnDimension('D')->setWidth(20);
+        $sheet->getColumnDimension('E')->setWidth(30);
+
+        $sheet->getDefaultRowDimension()->setRowHeight(-1);
+
+        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+
+        $sheet->setTitle('EMPLOYEE DATA');
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="employee_data.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+    }
+
+
+    // 
+    public function export_daily_input($hari)
+    {
+        require_once FCPATH . 'vendor/autoload.php';
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -415,7 +524,7 @@ class Admin extends CI_Controller
             ]
         ];
 
-        $sheet->setCellValue('A1', "DAILY RECAP ABSENT ( " . $date . ")");
+        $sheet->setCellValue('A1', "DAILY RECAP ABSENT ( " . $hari . ")");
         $sheet->mergeCells('A1:G1');
         $sheet->getStyle('A1')->getFont()->setBold(true);
 
@@ -435,8 +544,7 @@ class Admin extends CI_Controller
         $sheet->getStyle('F3')->applyFromArray($style_col);
         $sheet->getStyle('G3')->applyFromArray($style_col);
 
-        $where = ['date' => $date];
-        $absensi = $this->m_user->get_data('absensi', $where)->result();
+        $absensi = $this->m_user->getharian($hari);
 
         $no = 1;
         $numrow = 4;
@@ -485,10 +593,9 @@ class Admin extends CI_Controller
     }
 
 
-    public function export_monthly_input()
+    public function export_monthly_input($bulan)
     {
         require_once FCPATH . 'vendor/autoload.php';
-        $month = $this->input->post('month');
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -519,7 +626,7 @@ class Admin extends CI_Controller
             ]
         ];
 
-        $sheet->setCellValue('A1', "MONTHLY RECAP ABSENT ( " . $month . ")");
+        $sheet->setCellValue('A1', "MONTHLY RECAP ABSENT ( " . $bulan . ")");
         $sheet->mergeCells('A1:G1');
         $sheet->getStyle('A1')->getFont()->setBold(true);
 
@@ -539,8 +646,7 @@ class Admin extends CI_Controller
         $sheet->getStyle('F3')->applyFromArray($style_col);
         $sheet->getStyle('G3')->applyFromArray($style_col);
 
-        $where = ['MONTH(date)' => $month];
-        $absensi = $this->m_user->get_data('absensi', $where)->result();
+        $absensi = $this->m_user->getbulanan($bulan);
 
         $no = 1;
         $numrow = 4;

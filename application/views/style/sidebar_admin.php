@@ -9,6 +9,7 @@
         bottom: 0;
         width: 100%;
         background: #a6d5cd;
+        height: 5rem;
     }
 
     nav ul {
@@ -16,7 +17,8 @@
         justify-content: center;
         align-items: center;
         list-style: none;
-        padding: 1rem 1rem 0 1rem;
+        padding-top: 1rem;
+        /* padding: 1rem 1rem 0.8rem 1rem; */
     }
 
     nav ul li {

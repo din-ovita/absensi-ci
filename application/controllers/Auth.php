@@ -29,6 +29,7 @@ class Auth extends CI_Controller
 	public function aksi_register()
 	{
 		$password = md5($this->input->post("password"));
+		$passwordk = $this->input->post("password");
 
 		$data = [
 			'username' => $this->input->post('username'),
@@ -43,7 +44,7 @@ class Auth extends CI_Controller
 		$query = $this->m_user->cek('user', $email);
 		$result = $query->row_array();
 		var_dump($result);
-		if (empty($result)) {
+		if (strlen($passwordk) >= 8 && empty($result)) {
 			$this->m_user->add('user', $data);
 			redirect(base_url('auth/login'));
 		} else {

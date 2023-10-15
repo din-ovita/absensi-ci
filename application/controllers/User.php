@@ -56,30 +56,16 @@ class User extends CI_Controller
         $where = ['id_karyawan' => $this->session->userdata('id')];
         $query = $this->m_user->cek('absensi', $where);
         $data['absensi'] = $query->result();
+
         date_default_timezone_set('Asia/Jakarta');
-        $date = date('Y-m-d');
+        $data['date'] = date('Y-m-d');
 
-        $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
+        $where = ['id_karyawan' => $this->session->userdata('id')];
         $data['data'] = $this->m_user->get_data('absensi', $where)->result();
-        // $result = $this->m_user->get_data('absensi', $where)->row_array();
-
-        // if ($result['jam_pulang'] === null) {
-        //     $currentTimestamp = time();
-
-        //     $startOfDayTimestamp = strtotime('tomorrow');
-
-        //     if ($currentTimestamp > $startOfDayTimestamp) {
-        //         $data1 = [
-        //             'jam_pulang' => '00:00:00',
-        //             'status' => 'done'
-        //         ];
-
-        //         $this->m_user->update('absensi', $data1, array('id' => $result['id']));
-        //     }
-        // }
 
         $this->load->view('user/history', $data);
     }
+
     public function permission()
     {
         $data = ['menu' => 'permission'];
@@ -109,12 +95,13 @@ class User extends CI_Controller
             'kegiatan' => $this->input->post('kegiatan'),
         ];
 
-        $data = ['id_karyawan' => $this->session->userdata('id')];
+        $data = ['id_karyawan' => $this->session->userdata('id'), 'date' => $date];
         $query = $this->m_user->cek('absensi', $data);
         $res = $query->row_array();
 
-        if (empty($res['jam_masuk'])) {
+        if (empty($res)) {
             $this->m_user->add('absensi', $data1);
+            $this->session->set_flashdata('succes', 'success');
             redirect(base_url('user/history'));
         } else {
             $this->m_user->update('absensi', $data2, array('id' => $res['id']));
@@ -199,6 +186,7 @@ class User extends CI_Controller
         $p = ['menu' => 'profile'];
         $this->load->view('user/profile', $data + $p);
     }
+
     public function change_profile()
     {
         $data1 = ['id' => $this->session->userdata('id')];
@@ -207,6 +195,7 @@ class User extends CI_Controller
         $p = ['menu' => 'change_profile'];
         $this->load->view('user/change_profile', $data + $p);
     }
+
     public function change_password()
     {
         $data1 = ['id' => $this->session->userdata('id')];

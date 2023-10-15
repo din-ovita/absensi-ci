@@ -73,7 +73,7 @@
 
     @media (min-width: 1200px) {
         section {
-margin-left: 15rem;
+            margin-left: 15rem;
             margin-top: 5rem;
         }
 
@@ -128,7 +128,7 @@ margin-left: 15rem;
                         <div>
                             <h2>permission information</h2>
                             <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"></textarea>
-                            <button type="button" disabled>Save</button>
+                            <button type="button" onclick="izin()">Save</button>
                         </div>
                     <?php endif ?>
                 <?php endforeach ?>
@@ -141,6 +141,16 @@ margin-left: 15rem;
             <?php endif ?>
         </form>
     </section>
+
+    <script>
+        function izin() {
+            Swal.fire({
+                title: 'The Internet?',
+                text: 'That thing is still around?',
+                icon: 'question',
+            });
+        }
+    </script>
 </body>
 
 </html>

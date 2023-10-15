@@ -238,14 +238,12 @@
                                 <td><?php echo $row->keterangan_izin ?></td>
                                 <td class="aksi">
                                     <a href="<?php echo base_url('user/validasi_edit') ?>"><i class="fas fa-edit"></i></a>
-                                    <?php foreach ($data as $row1) : ?>
-                                        <?php if (empty($row1->jam_pulang) && $row1->keterangan_izin == '-') : ?>
-                                            <a href="<?php echo base_url('user/pulang') ?>"><i class="fas fa-home"></i></a>
-                                        <?php else : ?>
-                                            <a href="" style="cursor:default; color: #4b5563;"><i class="fas fa-home"></i></a>
-                                        <?php endif ?>
-                                    <?php endforeach; ?>
-                                    <button onclick="hapus(<?php echo $row->id ?>)"><i class="fas fa-trash-alt"></i></button>
+                                    <?php if (empty(pulang($row->id)) && izin($row->id) == '-') : ?>
+                                        <a href="<?php echo base_url('user/pulang') ?>"><i class="fas fa-home"></i></a>
+                                    <?php else : ?>
+                                        <a href="" style="cursor:default; color: #4b5563;"><i class="fas fa-home"></i></a>
+                                    <?php endif ?>
+                                    <button type="button" onclick="hapus(<?php echo $row->id ?>)"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -267,6 +265,9 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    setTimeout(function() {
+                        window.location.href = "<?php echo base_url('user/delete_absent') ?>" + "/" + id;
+                    }, 1500);
                     Swal.fire({
                         title: 'Deleted!',
                         text: 'Your data has been deleted.',
@@ -275,32 +276,8 @@
                     })
                 }
 
-                setTimeout(function() {
-                    window.location.href = "<?php echo base_url('user/delete_absent') ?>" + "/" + id;
-                }, 1500);
             })
         }
-
-        // function edit() {
-        //     Swal.fire({
-        //         title: 'What do you want to change?',
-        //         showDenyButton: true,
-        //         showCancelButton: false,
-        //         confirmButtonText: 'Daily Activities',
-        //         denyButtonText: `Permission`,
-        //         denyButtonColor: '#2563eb'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             setTimeout(function() {
-        //                 window.location.href = "<?php echo base_url('user/absent') ?>";
-        //             }, 100);
-        //         } else if (result.isDenied) {
-        //             setTimeout(function() {
-        //                 window.location.href = "<?php echo base_url('user/permission') ?>";
-        //             }, 100);
-        //         }
-        //     })
-        // }
     </script>
 
 </body>

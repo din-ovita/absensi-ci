@@ -178,6 +178,7 @@
                             <i class="fas fa-eye-slash" onclick="togglePassword()" id="icon"></i>
                         </div>
                     </div>
+                    <p>*Password minimal 8 charakter</p>
                     <div class="sign-up">
                         <button type="submit">Sign Up</button>
                     </div>

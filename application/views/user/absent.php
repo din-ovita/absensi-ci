@@ -143,6 +143,21 @@
             <?php endif ?>
         </form>
     </section>
+
+    <?php if ($this->session->flashdata('succes')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal melakukan izin',
+                text: '<?= $this->session->flashdata('gagal_izin') ?>',
+                background: '#fff',
+                customClass: {
+                    title: 'text-dark',
+                    content: 'text-dark'
+                }
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

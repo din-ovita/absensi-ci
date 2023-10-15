@@ -41,7 +41,7 @@
         justify-content: space-between;
         align-items: center;
         background: #a6d5cd;
-        padding: 0.75rem 2rem;
+        padding: 1rem;
     }
 
     section .card h1 {
@@ -125,14 +125,35 @@
             margin-top: 0.5rem;
         }
 
-        form button {
-            color: #fff;
-            background: #c7e4df;
-            border: none;
-            margin-left: 1rem;
-            padding: 0.5rem 1.5rem;
-            font-size: 1em;
+        form {
+            padding: 0.73rem 2rem;
         }
+
+        button.export {
+            margin: 1rem 2rem;
+        }
+
+    }
+
+    form input {
+        padding: 0.5rem;
+        background: #f4f4f4;
+        border: 1px solid #a6d5cd;
+        margin-top: 0.5rem;
+    }
+
+    button {
+        color: #fff;
+        background: #c7e4df;
+        border: none;
+        margin-top: 0.5rem;
+        margin-left: 0.4rem;
+        padding: 0.5rem 1rem;
+        font-size: 1em;
+    }
+
+    .export {
+        margin: 1rem 1rem;
     }
 </style>
 
@@ -145,14 +166,14 @@
     <section>
         <div class="box">
             <div class="card">
-                <form action="<?php echo base_url('admin/export') ?>" method="post">
+                <form action="<?php echo base_url('admin/daily_rekap') ?>" method="post">
                     <h1>Daily Recap</h1>
-                    <button onclick="export_today()">Export</button>
-                    <!-- <div>
-                        <input type="date" name="date">
-                        <button type="submit">Export</button>
-                    </div> -->
+                    <div>
+                        <input type="date" name="date" id="date">
+                        <button type="submit">Show</button>
+                    </div>
                 </form>
+                <button class="export" onclick="export_today()">Export</button>
                 <div class="card2">
                     <table>
                         <thead>
@@ -193,8 +214,14 @@
     </section>
 
     <script>
+        document.getElementById('date').addEventListener('change', function() {
+            sessionStorage.setItem('date', this.value);
+        });
+
         function export_today() {
-            window.location.href = '<?php echo base_url('admin/export') ?>';
+            var hari = sessionStorage.getItem('date')
+
+            window.location.href = '<?php echo base_url('admin/export_daily_input/') ?>' + hari;
         }
     </script>
 
