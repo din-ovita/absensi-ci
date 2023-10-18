@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Recap</title>
+    <title>All Recap</title>
     <?php $this->load->view('style/head') ?>
 </head>
 
@@ -37,12 +37,12 @@
         filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
     }
 
-    form {
+    header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         background: #a6d5cd;
-        padding: 1rem;
+        padding: 0.75rem 1rem;
     }
 
     section .card h1 {
@@ -84,6 +84,38 @@
         font-size: 0.8em;
     }
 
+    button {
+        color: #fff;
+        background: #c7e4df;
+        border: none;
+        margin-top: 0.5rem;
+        margin-left: 0.4rem;
+        padding: 0.5rem 1rem;
+        font-size: 1em;
+    }
+
+    .pagination {
+        display: flex;
+        margin: 0.5em auto;
+    }
+
+    .pagination a,
+    .pagination strong {
+        border: 1px solid silver;
+        border-radius: 8px;
+        color: black;
+        padding: 0.5em;
+        margin-right: 0.5em;
+        text-decoration: none;
+    }
+
+    .pagination a:hover,
+    .pagination strong {
+        border: 1px solid #a6d5cd;
+        background-color: #a6d5cd;
+        color: white;
+    }
+
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -120,42 +152,9 @@
             font-size: 0.9em;
         }
 
-        form input {
-            padding: 0.5rem;
-            background: #f4f4f4;
-            border: 1px solid #a6d5cd;
-            margin-top: 0.5rem;
+        header {
+            padding: 0.75rem 2rem;
         }
-
-        form {
-            padding: 0.73rem 2rem;
-        }
-
-        button.export {
-            margin: 1rem 2rem;
-        }
-
-    }
-
-    form input {
-        padding: 0.5rem;
-        background: #f4f4f4;
-        border: 1px solid #a6d5cd;
-        margin-top: 0.5rem;
-    }
-
-    button {
-        color: #fff;
-        background: #c7e4df;
-        border: none;
-        margin-top: 0.5rem;
-        margin-left: 0.4rem;
-        padding: 0.5rem 1rem;
-        font-size: 1em;
-    }
-
-    .export {
-        margin: 1rem 1rem;
     }
 </style>
 
@@ -168,14 +167,10 @@
     <section>
         <div class="box">
             <div class="card">
-                <form action="<?php echo base_url('admin/daily_rekap') ?>" method="post">
-                    <h1>Daily Recap</h1>
-                    <div>
-                        <input type="date" name="date" id="date">
-                        <button type="submit">Show</button>
-                    </div>
-                </form>
-                <button class="export" onclick="export_today()">Export</button>
+                <header>
+                    <h1>All Recap History Absent</h1>
+                    <button onclick="all_export()">Export</button>
+                </header>
                 <div class="card2">
                     <table>
                         <thead>
@@ -191,9 +186,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if ($absent) : ?>
+                            <?php if ($absensi) : ?>
                                 <?php $no = 0;
-                                foreach ($absent as $row) : $no++ ?>
+                                foreach ($absensi as $row) : $no++ ?>
                                     <tr>
                                         <td style="text-align: center;"><?php echo $no ?> </td>
                                         <td><?php echo name($row->id_karyawan) ?></td>
@@ -216,20 +211,17 @@
                             <?php endif ?>
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        <?php echo $pagination_links; ?>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
     <script>
-        document.getElementById('date').addEventListener('change', function() {
-            sessionStorage.setItem('date', this.value);
-        });
-
-        function export_today() {
-            var hari = sessionStorage.getItem('date')
-
-            window.location.href = '<?php echo base_url('admin/export_daily_input/') ?>' + hari;
+        function
+        all_export() {
+            window.location.href = '<?php echo base_url('admin/export') ?>';
         }
     </script>
 

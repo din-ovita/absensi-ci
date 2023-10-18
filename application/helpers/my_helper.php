@@ -31,3 +31,14 @@ function izin($id)
         return $stmt;
     }
 }
+
+function tgl($id)
+{
+    $ci = &get_instance();
+    $ci->load->database();
+    $result = $ci->db->where('id', $id)->get('absensi');
+    foreach ($result->result() as $c) {
+        $stmt = $c->date;
+        return $stmt;
+    }
+}

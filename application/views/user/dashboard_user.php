@@ -211,17 +211,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 0;
-                        foreach ($absensi as $row) : $no++ ?>
+                        <?php if ($absensi) : ?>
+                            <?php $no = 0;
+                            foreach ($absensi as $row) : $no++ ?>
+                                <tr>
+                                    <td style="text-align: center;"><?php echo $no ?> </td>
+                                    <td><?php echo $row->date ?></td>
+                                    <td><?php echo $row->jam_masuk ?></td>
+                                    <td><?php echo $row->kegiatan ?></td>
+                                    <td><?php echo $row->jam_pulang ?></td>
+                                    <td><?php echo $row->keterangan_izin ?></td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else : ?>
                             <tr>
-                                <td style="text-align: center;"><?php echo $no ?> </td>
-                                <td><?php echo $row->date ?></td>
-                                <td><?php echo $row->jam_masuk ?></td>
-                                <td><?php echo $row->kegiatan ?></td>
-                                <td><?php echo $row->jam_pulang ?></td>
-                                <td><?php echo $row->keterangan_izin ?></td>
+                                <td colspan="6">Absence History Does Not Exist</td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>

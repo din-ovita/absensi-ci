@@ -198,7 +198,6 @@
             background: transparent;
         }
     }
-
     .style {
         z-index: 20;
     }
@@ -227,31 +226,61 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 0;
-                        foreach ($absensi as $row) : $no++ ?>
+                        <?php if ($absensi) : ?>
+                            <?php $no = 0;
+                            foreach ($absensi as $row) : $no++ ?>
+                                <tr>
+                                    <td style="text-align: center;"><?php echo $no ?> </td>
+                                    <td><?php echo $row->date ?></td>
+                                    <td><?php echo $row->jam_masuk ?></td>
+                                    <td><?php echo $row->kegiatan ?></td>
+                                    <td><?php echo $row->jam_pulang ?></td>
+                                    <td><?php echo $row->keterangan_izin ?></td>
+                                    <td class="aksi">
+                                        <a href="<?php echo base_url('user/validasi_edit') ?>"><i class="fas fa-edit"></i></a>
+                                        <?php         date_default_timezone_set('Asia/Jakarta'); $tgl = date('Y-m-d')?>
+                                        <?php if (empty(pulang($row->id)) && izin($row->id) == '-' && tgl($row->id) == $tgl) : ?>
+                                            <a href="<?php echo base_url('user/pulang') ?>"><i class="fas fa-home"></i></a>
+                                        <?php else : ?>
+                                            <a href="" style="cursor:default; color: #4b5563;"><i class="fas fa-home"></i></a>
+                                        <?php endif ?>
+                                        <button type="button" onclick="hapus(<?php echo $row->id ?>)"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else : ?>
                             <tr>
-                                <td style="text-align: center;"><?php echo $no ?> </td>
-                                <td><?php echo $row->date ?></td>
-                                <td><?php echo $row->jam_masuk ?></td>
-                                <td><?php echo $row->kegiatan ?></td>
-                                <td><?php echo $row->jam_pulang ?></td>
-                                <td><?php echo $row->keterangan_izin ?></td>
-                                <td class="aksi">
-                                    <a href="<?php echo base_url('user/validasi_edit') ?>"><i class="fas fa-edit"></i></a>
-                                    <?php if (empty(pulang($row->id)) && izin($row->id) == '-') : ?>
-                                        <a href="<?php echo base_url('user/pulang') ?>"><i class="fas fa-home"></i></a>
-                                    <?php else : ?>
-                                        <a href="" style="cursor:default; color: #4b5563;"><i class="fas fa-home"></i></a>
-                                    <?php endif ?>
-                                    <button type="button" onclick="hapus(<?php echo $row->id ?>)"><i class="fas fa-trash-alt"></i></button>
-                                </td>
+                                <td colspan="7">Absence History Does Not Exist</td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+
+    <?php if ($this->session->flashdata('succes')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                showConfirmButton: false,
+                text: '<?= $this->session->flashdata('succes') ?>',
+                timer: 1500,
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                showConfirmButton: false,
+                text: '<?= $this->session->flashdata('success') ?>',
+                timer: 1500,
+            });
+        </script>
+    <?php endif; ?>
 
     <script>
         function hapus(id) {

@@ -129,7 +129,7 @@
                         <div>
                             <h2>daily activities</h2>
                             <textarea name="kegiatan" id="" cols="30" rows="10" placeholder="Your daily activities"><?php echo $row->kegiatan ?></textarea>
-                            <button type="button" disabled>Save</button>
+                            <button type="button" onclick="absen()">Save</button>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $row->id ?>">
                     <?php endif ?>
@@ -144,20 +144,34 @@
         </form>
     </section>
 
-    <?php if ($this->session->flashdata('succes')) : ?>
+    <?php if ($this->session->flashdata('success')) : ?>
         <script>
             Swal.fire({
-                icon: 'error',
-                title: 'Gagal melakukan izin',
-                text: '<?= $this->session->flashdata('gagal_izin') ?>',
-                background: '#fff',
-                customClass: {
-                    title: 'text-dark',
-                    content: 'text-dark'
-                }
+                icon: 'success',
+                title: 'Success',
+                text: '<?= $this->session->flashdata('success') ?>',
+                showConfirmButton: false,
+                timer: 1500,
             });
         </script>
     <?php endif; ?>
+
+    <script>
+        function absen() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Cannot be absent',
+                text: 'You have permission',
+                background: '#fff',
+                showConfirmButton: false,
+                customClass: {
+                    title: 'text-dark',
+                    content: 'text-dark'
+                },
+                timer: 1500,
+            });
+        }
+    </script>
 </body>
 
 </html>

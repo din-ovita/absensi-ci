@@ -23,6 +23,7 @@
     section {
         margin-left: 0;
         margin-top: 5rem;
+        margin-bottom: 8rem;
         padding: 1rem 2rem;
         display: flex;
         justify-content: center;
@@ -87,6 +88,7 @@
         section {
             margin-left: 15rem;
             margin-top: 5rem;
+            margin-bottom: 3rem;
         }
 
         section .card2 {
@@ -182,7 +184,7 @@
             <div class="card">
                 <form action="<?php echo base_url('admin/monthly_rekap') ?>" method="post">
                     <h1>Monthly Recap</h1>
-                    <div style="display: flex; align-items: center;">
+                    <div>
                         <input type="month" name="month" id="bulan">
                         <button type="submit">Show</button>
                     </div>
@@ -199,6 +201,7 @@
                                 <th>Daily Activities</th>
                                 <th>Home Time</th>
                                 <th>Permission</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -213,15 +216,21 @@
                                         <td><?php echo $row->kegiatan ?></td>
                                         <td><?php echo $row->jam_pulang ?></td>
                                         <td><?php echo $row->keterangan_izin ?></td>
+                                        <?php if ($row->status == 'not') : ?>
+                                            <td style="font-weight: 500; color: #dc2626; text-transform: uppercase;"><?php echo $row->status ?></td>
+                                        <?php else : ?>
+                                            <td style="font-weight: 500; color: #16a34a; text-transform: uppercase;"><?php echo $row->status ?></td>
+                                        <?php endif ?>
                                     </tr>
                                 <?php endforeach ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="7">No Data</td>
+                                    <td colspan="8">No Data</td>
                                 </tr>
                             <?php endif ?>
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
         </div>

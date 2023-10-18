@@ -53,6 +53,8 @@
 <div class="nav">
     <h2><i class="fas fa-project-diagram"></i> preSent.</h2>
     <div class="profile">
-        <a href="<?php echo base_url('user/profile') ?>"><img src="<?php echo base_url('images/user_picture.jpg') ?>" alt=""></a>
+        <?php foreach ($user as $row) : ?>
+            <a href="<?php echo base_url('user/profile') ?>"><img src="<?php echo base_url('images/' . $row->image) ?>" alt=""></a>
+        <?php endforeach ?>
     </div>
 </div>

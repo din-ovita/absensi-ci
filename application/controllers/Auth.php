@@ -44,10 +44,14 @@ class Auth extends CI_Controller
 		$query = $this->m_user->cek('user', $email);
 		$result = $query->row_array();
 		var_dump($result);
-		if (strlen($passwordk) >= 8 && empty($result)) {
+		if ($result) {
+			$this->session->set_flashdata('error_message', 'The account already exists');
+			redirect(base_url('auth/register'));
+		} elseif (strlen($passwordk) >= 8 && empty($result)) {
 			$this->m_user->add('user', $data);
 			redirect(base_url('auth/login'));
 		} else {
+			$this->session->set_flashdata('error_message', 'Password must be at least 8 characters');
 			redirect(base_url('auth/register'));
 		}
 	}
@@ -61,13 +65,14 @@ class Auth extends CI_Controller
 			if ($password === $konfirmasi_password) {
 				$data['password'] = md5($password);
 			} else {
+				$this->session->set_flashdata('message', 'The password and confirmed password must be the same!');
 				redirect(base_url('auth/login'));
 			}
 		}
 		$query = $this->m_user->cek('user', $data);
 		$res = $query->row_array();
 		if ($query->num_rows() == 1) {
-			$data_session = ["id" => $res['id'], "username" => $res['username'], "email" => $res['email'], "first_name" => $res['nama_depan'], "last_name" => $res['nama_belakang'], "role" => $res['role'],];
+			$data_session = ["id" => $res['id'], "username" => $res['username'], "email" => $res['email'], "first_name" => $res['nama_depan'], "last_name" => $res['nama_belakang'], "role" => $res['role'], 'logged_in' => 'login'];
 			$data_session['login'] = "login";
 			$this->session->set_userdata($data_session);
 			$this->session->set_userdata('login', $data_session);
@@ -77,6 +82,7 @@ class Auth extends CI_Controller
 				redirect(base_url('user'));
 			}
 		} else {
+			$this->session->set_flashdata('error_message', 'Incorrect email or password');
 			redirect(base_url('auth/login'));
 		}
 	}
@@ -89,19 +95,25 @@ class Auth extends CI_Controller
 			if ($password === $konfirmasi_password) {
 				$data['password'] = md5($password);
 			} else {
+				$this->session->set_flashdata('message', 'The password and confirmed password must be the same!');
 				redirect(base_url('auth/login'));
 			}
 		}
 		$query = $this->m_user->cek('user', $data);
 		$res = $query->row_array();
 		if ($query->num_rows() == 1) {
-			$data_session = ["id" => $res['id'], "username" => $res['username'], "email" => $res['email'], "first_name" => $res['nama_depan'], "last_name" => $res['nama_belakang'], "role" => $res['role'],];
+			$data_session = ["id" => $res['id'], "username" => $res['username'], "email" => $res['email'], "first_name" => $res['nama_depan'], "last_name" => $res['nama_belakang'], "role" => $res['role'], 'logged_in' => 'login'];
 			$data_session['login'] = "login";
 			$this->session->set_userdata($data_session);
 			$this->session->set_userdata('login', $data_session);
-			redirect(base_url('user'));
+			if ($res['role'] == 'admin') {
+				redirect(base_url('admin'));
+			} else {
+				redirect(base_url('user'));
+			}
 		} else {
-			redirect(base_url('auth/login'));
+			$this->session->set_flashdata('error_message', 'Incorrect username or password');
+			redirect(base_url('auth/login_username'));
 		}
 	}
 

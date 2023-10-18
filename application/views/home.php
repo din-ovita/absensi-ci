@@ -29,6 +29,7 @@
         background: white;
         min-height: 100vh;
         background: #ebf5f6;
+        padding: 5rem 0;
     }
 
     section .color {
@@ -93,12 +94,17 @@
 
     @media (min-width: 1200px) {
         section .color:nth-child(1) {
+            bottom: 10px;
             right: 180px;
             width: 350px;
-            height: 550px;
+            height: 540px;
             background: #deeeee;
             border-top-left-radius: 200px;
             border-top-right-radius: 200px;
+        }
+
+        section {
+            padding: 0;
         }
 
         .home {

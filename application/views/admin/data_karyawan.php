@@ -19,6 +19,7 @@
     section {
         margin-left: 0;
         margin-top: 5rem;
+        margin-bottom: 8rem;
         padding: 1rem 2rem;
         display: flex;
         justify-content: center;
@@ -91,6 +92,7 @@
         section {
             margin-left: 15rem;
             margin-top: 5rem;
+            margin-bottom: 3rem;
         }
 
         section .card2 {
@@ -135,37 +137,28 @@
             padding: 0.75rem 2rem;
         }
 
-        /*  */
+    }
 
-        .pagination {
-            text-align: center;
-            margin-top: 20px;
-        }
+    .pagination {
+        display: flex;
+        margin: 0.5em auto;
+    }
 
-        /* Pagination links */
-        .pagination a {
-            display: inline-block;
-            padding: 5px 10px;
-            margin: 0 2px;
-            border: 1px solid #ddd;
-            background-color: #f5f5f5;
-            color: #333;
-            text-decoration: none;
-            border-radius: 3px;
-        }
+    .pagination a,
+    .pagination strong {
+        border: 1px solid silver;
+        border-radius: 8px;
+        color: black;
+        padding: 0.5em;
+        margin-right: 0.5em;
+        text-decoration: none;
+    }
 
-        /* Current page link */
-        .pagination .active a {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        /* Disabled page link (for previous and next buttons) */
-        .pagination .disabled a {
-            pointer-events: none;
-            cursor: default;
-            color: #ccc;
-        }
+    .pagination a:hover,
+    .pagination strong {
+        border: 1px solid #a6d5cd;
+        background-color: #a6d5cd;
+        color: white;
     }
 
     .img img {

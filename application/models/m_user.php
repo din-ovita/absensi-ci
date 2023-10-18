@@ -7,6 +7,11 @@ class M_user extends CI_Model
         return $this->db->get('user')->result();
     }
 
+    public function get_absent()
+    {
+        return $this->db->get('absensi')->result();
+    }
+
     public function get_data($tabel, $where)
     {
         $data = $this->db->where($where)->get($tabel);
@@ -67,18 +72,13 @@ class M_user extends CI_Model
         return $this->db->where('role', 'karyawan')->get('user')->num_rows();
     }
 
-    public function getAbsensiLast7Days()
+    public function getAbsensiByWeek($year, $week)
     {
-        $this->load->database();
-        $end_date = date('Y-m-d');
-        $start_date = date('Y-m-d', strtotime('-7 days', strtotime($end_date)));
-        $query = $this->db->select('id_karyawan, date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status, COUNT(*) AS total_absences')
-            ->from('absensi')
-            ->where('date >=', $start_date)
-            ->where('date <=', $end_date)
-            ->group_by('date, kegiatan, jam_masuk, jam_pulang, keterangan_izin, status')
-            ->get();
-        return $query->result_array();
+        $this->db->from('absensi');
+        $this->db->where("YEARWEEK(date, 1) = '$year$week'");
+        $db = $this->db->get();
+        $result = $db->result_array();
+        return $result;
     }
 
     public function getbulanan($bulan)
@@ -99,8 +99,6 @@ class M_user extends CI_Model
         return $result;
     }
 
-    // pp
-
     public function get_items($limit, $offset, $role)
     {
         $this->db->limit($limit, $offset);
@@ -111,5 +109,17 @@ class M_user extends CI_Model
     public function count_items($role)
     {
         return $this->db->where('role', $role)->get('user')->num_rows();
+    }
+
+    public function get_item($limit, $offset, $table)
+    {
+        $this->db->limit($limit, $offset);
+        $query = $this->db->get($table);
+        return $query->result();
+    }
+
+    public function count_item( $table)
+    {
+        return $this->db->get($table)->num_rows();
     }
 }

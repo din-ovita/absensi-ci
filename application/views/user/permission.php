@@ -128,7 +128,7 @@
                         <div>
                             <h2>permission information</h2>
                             <textarea name="izin" id="" cols="30" rows="10" placeholder="Your permission information"></textarea>
-                            <button type="button" onclick="izin()">Save</button>
+                            <button type="button" onclick="ijin()">Save</button>
                         </div>
                     <?php endif ?>
                 <?php endforeach ?>
@@ -142,12 +142,31 @@
         </form>
     </section>
 
-    <script>
-        function izin() {
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
             Swal.fire({
-                title: 'The Internet?',
-                text: 'That thing is still around?',
-                icon: 'question',
+                icon: 'success',
+                title: 'Success',
+                text: '<?= $this->session->flashdata('success') ?>',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        </script>
+    <?php endif; ?>
+
+    <script>
+        function ijin() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Cannot be permission',
+                text: 'You have absent',
+                background: '#fff',
+                showConfirmButton: false,
+                customClass: {
+                    title: 'text-dark',
+                    content: 'text-dark'
+                },
+                timer: 1500,
             });
         }
     </script>

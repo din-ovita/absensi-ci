@@ -23,6 +23,7 @@
     section {
         margin-left: 0;
         margin-top: 5rem;
+        margin-bottom: 8rem;
         padding: 1rem 2rem;
         display: flex;
         justify-content: center;
@@ -87,6 +88,7 @@
         section {
             margin-left: 15rem;
             margin-top: 5rem;
+            margin-bottom: 3rem;
         }
 
         section .card2 {
@@ -138,15 +140,31 @@
             padding: 0.5rem 1.5rem;
             font-size: 1em;
         }
+
+        button.export {
+            margin: 1rem 2rem;
+        }
     }
 
-    form button {
+    form input {
+        padding: 0.5rem;
+        background: #f4f4f4;
+        border: 1px solid #a6d5cd;
+        margin-top: 0.5rem;
+    }
+
+    button {
         color: #fff;
         background: #c7e4df;
         border: none;
-        margin-left: 0;
-        padding: 0.5rem 1.5rem;
+        margin-top: 0.5rem;
+        margin-left: 0.4rem;
+        padding: 0.5rem 1rem;
         font-size: 1em;
+    }
+
+    .export {
+        margin: 1rem 1rem 0 1rem;
     }
 </style>
 
@@ -159,14 +177,14 @@
     <section>
         <div class="box">
             <div class="card">
-                <form action="<?php echo base_url('admin/export_week') ?>" method="post">
+                <form action="<?php echo base_url('admin/weekly_rekap') ?>" method="post">
                     <h1>Weekly Recap</h1>
-                    <button onclick="export_today()">Export</button>
-                    <!-- <div>
-                        <input type="date" name="date">
-                        <button type="submit">Export</button>
-                    </div> -->
+                    <div>
+                        <input type="week" name="week" id="week">
+                        <button type="submit">Show</button>
+                    </div>
                 </form>
+                <button class="export" onclick="export_week()">Export</button>
                 <div class="card2">
                     <table>
                         <thead>
@@ -178,6 +196,7 @@
                                 <th>Daily Activities</th>
                                 <th>Home Time</th>
                                 <th>Permission</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -192,11 +211,16 @@
                                         <td><?php echo $row['kegiatan'] ?></td>
                                         <td><?php echo $row['jam_pulang'] ?></td>
                                         <td><?php echo $row['keterangan_izin'] ?></td>
+                                        <?php if ($row['status'] == 'not') : ?>
+                                            <td style="font-weight: 500; color: #dc2626; text-transform: uppercase;"><?php echo $row['status'] ?></td>
+                                        <?php else : ?>
+                                            <td style="font-weight: 500; color: #16a34a; text-transform: uppercase;"><?php echo $row['status'] ?></td>
+                                        <?php endif ?>
                                     </tr>
                                 <?php endforeach ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="7">No Data</td>
+                                    <td colspan="8">No Data</td>
                                 </tr>
                             <?php endif ?>
                         </tbody>
@@ -207,10 +231,17 @@
     </section>
 
     <script>
+        document.getElementById('week').addEventListener('change', function() {
+            sessionStorage.setItem('week', this.value);
+        });
+
         function export_week() {
-            window.location.href = '<?php echo base_url('admin/export_week') ?>';
+
+            var week = sessionStorage.getItem('week');
+            window.location.href = '<?php echo base_url('admin/export_weekly_input/') ?>' + week;
         }
     </script>
+
 
 </body>
 

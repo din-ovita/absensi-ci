@@ -7,6 +7,10 @@ class User extends CI_Controller
         $this->load->model("m_user");
         $this->load->library('upload');
         $this->load->helper('url');
+
+        if ($this->session->userdata('logged_in') != 'login') {
+            redirect(base_url() . 'auth');
+        }
     }
 
     public function upload_img($value)
@@ -34,6 +38,10 @@ class User extends CI_Controller
         $query = $this->m_user->cek('absensi', $where);
         $data['absensi'] = $query->result();
 
+        $data1 = ['id' => $this->session->userdata('id')];
+        $query = $this->m_user->cek('user', $data1);
+        $data['user'] = $query->result();
+
         $data['total_absen'] = $this->m_user->total_absent($this->session->userdata('id'));
         $data['total_izin'] = $this->m_user->total_izin($this->session->userdata('id'));
 
@@ -46,10 +54,15 @@ class User extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $date = date('Y-m-d');
 
+        $data1 = ['id' => $this->session->userdata('id')];
+        $query = $this->m_user->cek('user', $data1);
+        $data['user'] = $query->result();
+
         $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
         $data['data'] = $this->m_user->get_data('absensi', $where)->result();
         $this->load->view('user/absent', $data);
     }
+
     public function history()
     {
         $data = ['menu' => 'history'];
@@ -57,11 +70,30 @@ class User extends CI_Controller
         $query = $this->m_user->cek('absensi', $where);
         $data['absensi'] = $query->result();
 
-        date_default_timezone_set('Asia/Jakarta');
-        $data['date'] = date('Y-m-d');
+        $data2 = ['id' => $this->session->userdata('id')];
+        $query = $this->m_user->cek('user', $data2);
+        $data['user'] = $query->result();
 
-        $where = ['id_karyawan' => $this->session->userdata('id')];
-        $data['data'] = $this->m_user->get_data('absensi', $where)->result();
+
+        date_default_timezone_set('Asia/Jakarta');
+        $date = date('Y-m-d');
+
+        $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
+        $result = $this->m_user->get_data('absensi', $where)->row_array();
+
+        if ($result['jam_pulang'] == null) {
+            $currentTimestamp = time();
+            $startOfDayTimestamp = strtotime('today 23:59:58');
+
+            if ($currentTimestamp > $startOfDayTimestamp) {
+                $data1 = [
+                    'jam_pulang' => '00:00:00',
+                    'status' => 'done'
+                ];
+
+                $this->m_user->update('absensi', $data1, array('id' => $result['id']));
+            }
+        }
 
         $this->load->view('user/history', $data);
     }
@@ -71,6 +103,10 @@ class User extends CI_Controller
         $data = ['menu' => 'permission'];
         date_default_timezone_set('Asia/Jakarta');
         $date = date('Y-m-d');
+
+        $data1 = ['id' => $this->session->userdata('id')];
+        $query = $this->m_user->cek('user', $data1);
+        $data['user'] = $query->result();
 
         $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
         $data['data'] = $this->m_user->get_data('absensi', $where)->result();
@@ -101,11 +137,12 @@ class User extends CI_Controller
 
         if (empty($res)) {
             $this->m_user->add('absensi', $data1);
-            $this->session->set_flashdata('succes', 'success');
+            $this->session->set_flashdata('succes', 'You have absent today');
             redirect(base_url('user/history'));
         } else {
             $this->m_user->update('absensi', $data2, array('id' => $res['id']));
-            redirect(base_url('user/absent'));
+            $this->session->set_flashdata('success', 'Your daily activities have been updated');
+            redirect(base_url('user/history'));
         }
     }
 
@@ -144,10 +181,12 @@ class User extends CI_Controller
 
         if (empty($res)) {
             $this->m_user->add('absensi', $data2);
+            $this->session->set_flashdata('success', 'You have permission today');
             redirect(base_url('user/history'));
         } else {
             $this->m_user->update('absensi', $data1, array('id' => $res['id']));
-            redirect(base_url('user/permission'));
+            $this->session->set_flashdata('success', 'Your permission have been updated');
+            redirect(base_url('user/history'));
         }
     }
 
@@ -156,18 +195,15 @@ class User extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $time_in = date('h:i:s a');
         $time = date('H:i:s', strtotime($time_in));
-
+        $date = date('Y-m-d');
 
         $data1 = [
             'jam_pulang' => $time,
             'status' => 'done'
         ];
 
-        $data = ['id_karyawan' => $this->session->userdata('id')];
-        $query = $this->m_user->cek('absensi', $data);
-        $res = $query->row_array();
-        $where = ['jam_pulang' => $res['jam_pulang']];
-        $data['data'] = $this->m_user->get_data('absensi', $where)->row_array();
+        $data = ['id_karyawan' => $this->session->userdata('id'), 'date' => $date];
+        $res = $this->m_user->cek('absensi', $data)->row_array();
 
         $izin = $this->m_user->update('absensi', $data1, array('id' => $res['id']));
 
@@ -227,7 +263,7 @@ class User extends CI_Controller
             ];
 
             $this->m_user->update('user', $data2, array('id' => $this->input->post('id')));
-
+            $this->session->set_flashdata('succes', 'Your profile has been updated');
             redirect(base_url('user/profile'));
         } else {
             $data2 = [
@@ -239,7 +275,7 @@ class User extends CI_Controller
             ];
 
             $this->m_user->update('user', $data2, array('id' => $this->input->post('id')));
-
+            $this->session->set_flashdata('succes', 'Your profile has been updated');
             redirect(base_url('user/profile'));
         }
     }
@@ -253,14 +289,15 @@ class User extends CI_Controller
             if ($new_password === $confirm_password) {
                 $data['password'] = md5($new_password);
             } else {
-                $this->session->set_flashdata('message', 'Password baru dan konfirmasi password harus sama!');
-                redirect(base_url('admin/akun'));
+                $this->session->set_flashdata('message', 'The new password and confirmed password must be the same!');
+                redirect(base_url('user/change_password'));
             }
         }
 
         $result = $this->m_user->update('user', $data, array('id' => $this->input->post('id')));
 
         if ($result) {
+            $this->session->set_flashdata('success', 'Your password has been updated');
             redirect(base_url('user/profile'));
         } else {
             redirect(base_url('user/profile'));

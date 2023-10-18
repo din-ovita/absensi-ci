@@ -107,6 +107,7 @@
         section {
             margin-left: 15rem;
             margin-top: 5rem;
+            margin-bottom: 3rem;
         }
 
         section .box {
@@ -183,6 +184,28 @@
 
     }
 
+    .pagination {
+        display: flex;
+        margin: 0.5em auto;
+    }
+
+    .pagination a,
+    .pagination strong {
+        border: 1px solid silver;
+        border-radius: 8px;
+        color: black;
+        padding: 0.5em;
+        margin-right: 0.5em;
+        text-decoration: none;
+    }
+
+    .pagination a:hover,
+    .pagination strong {
+        border: 1px solid #a6d5cd;
+        background-color: #a6d5cd;
+        color: white;
+    }
+
     .card2 h1 {
         text-transform: capitalize;
         margin-bottom: 1rem;
@@ -238,6 +261,7 @@
                             <th>Daily Activities</th>
                             <th>Home Time</th>
                             <th>Permission</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -252,11 +276,16 @@
                                     <td><?php echo $row->kegiatan ?></td>
                                     <td><?php echo $row->jam_pulang ?></td>
                                     <td><?php echo $row->keterangan_izin ?></td>
+                                    <?php if ($row->status == 'not') : ?>
+                                        <td style="font-weight: 500; color: #dc2626; text-transform: uppercase;"><?php echo $row->status ?></td>
+                                    <?php else : ?>
+                                        <td style="font-weight: 500; color: #16a34a; text-transform: uppercase;"><?php echo $row->status ?></td>
+                                    <?php endif ?>
                                 </tr>
                             <?php endforeach ?>
                         <?php else : ?>
                             <tr>
-                                <td colspan="7">No Data</td>
+                                <td colspan="8">No Data</td>
                             </tr>
                         <?php endif ?>
                     </tbody>

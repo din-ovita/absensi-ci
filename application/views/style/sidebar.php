@@ -9,6 +9,7 @@
         bottom: 0;
         width: 100%;
         background: #a6d5cd;
+        height: 5rem;
     }
 
     nav ul {
@@ -20,7 +21,7 @@
     }
 
     nav ul li {
-        margin: 0 0.4rem;
+        margin: 0 1rem;
         height: 100%;
     }
 
@@ -52,17 +53,21 @@
     nav ul li a span {
         display: block;
         margin-top: 0.3rem;
+        position: absolute;
         transform: translateY(100px);
     }
 
     nav ul li.active a span {
         font-size: 0.85em;
-        transform: translateY(25px);
     }
 
     .logout {
         position: absolute;
         visibility: hidden;
+    }
+
+    .jam {
+        transform: translateY(130px);
     }
 
     @media (min-width: 1200px) {
@@ -122,6 +127,7 @@
         }
 
         nav ul li a span {
+            position: relative;
             margin-top: 0rem;
             margin-bottom: 0rem;
             transform: translateY(0);
@@ -153,10 +159,27 @@
             margin-top: 0.3rem;
             margin-right: 0.5rem;
         }
+
+        .jam {
+            text-align: center;
+            margin-top: 3rem;
+            color: #fff;
+            font-size: 1.1em;
+            transform: translateY(0);
+        }
+
+        .jam span {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 1.6em;
+        }
     }
 </style>
 
 <nav>
+    <?php
+    date_default_timezone_set("Asia/jakarta");
+    ?>
     <ul>
         <li class="<?= $menu == 'dashboard' ? 'active' : '' ?>">
             <a href="<?php echo base_url('user') ?>"> <i class="fas fa-palette"></i> <span>Dashboard</span>
@@ -172,7 +195,32 @@
             <a href="<?php echo base_url('user/permission') ?>"><i class="fas fa-minus-circle"></i><span>Permission</span></a>
         </li>
     </ul>
+    <p class="jam"><?php echo date('d-m-Y') ?><span id="jam"></span></p>
     <div class="logout">
         <a href="<?php echo base_url('auth/logout') ?>"><i class="far fa-circle"></i> Logout</a>
     </div>
 </nav>
+
+<script type="text/javascript">
+    window.onload = function() {
+        jam();
+    }
+
+    function jam() {
+        var e = document.getElementById('jam'),
+            d = new Date(),
+            h, m, s;
+        h = d.getHours();
+        m = set(d.getMinutes());
+        s = set(d.getSeconds());
+
+        e.innerHTML = h + ':' + m + ':' + s;
+
+        setTimeout('jam()', 1000);
+    }
+
+    function set(e) {
+        e = e < 10 ? '0' + e : e;
+        return e;
+    }
+</script>

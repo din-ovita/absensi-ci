@@ -73,6 +73,7 @@
     .nav ul li a:focus {
         outline: none;
     }
+
     .box {
         margin: 5rem 1rem;
         padding: 2rem 1rem 4rem 1rem;
@@ -297,6 +298,18 @@
             </form>
         <?php endforeach ?>
     </section>
+
+    <?php if ($this->session->flashdata('message')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops..',
+                text: '<?= $this->session->flashdata('message') ?>',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        </script>
+    <?php endif; ?>
 
 </body>
 

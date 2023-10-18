@@ -76,7 +76,7 @@
 
     .box {
         margin: 5rem 1rem;
-        padding: 2rem 1rem;
+        padding: 2rem 1rem 5rem 1rem;
         background: #fff;
         filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
     }
@@ -102,9 +102,25 @@
     }
 
     .logout {
-        visibility: hidden;
+        visibility: visible;
+        position: absolute;
+        right: 2rem;
+        bottom: 1.5rem;
     }
 
+    .logout a {
+        text-decoration: none;
+        color: #000;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .logout a i {
+        font-size: 1.3em;
+        color: red;
+        margin-top: 0.3rem;
+        margin-right: 0.5rem;
+    }
 
     @media (min-width: 1200px) {
         header {
@@ -191,24 +207,7 @@
         }
 
         .logout {
-            visibility: visible;
-            position: absolute;
-            right: 2rem;
-            bottom: 1.5rem;
-        }
-
-        .logout a {
-            text-decoration: none;
-            color: #000;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-
-        .logout a i {
-            font-size: 1.3em;
-            color: red;
-            margin-top: 0.3rem;
-            margin-right: 0.5rem;
+            visibility: hidden;
         }
     }
 </style>
@@ -243,6 +242,28 @@
             </div>
         <?php endforeach ?>
     </section>
+    <?php if ($this->session->flashdata('succes')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                showConfirmButton: false,
+                text: '<?= $this->session->flashdata('succes') ?>',
+                timer: 1500,
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                showConfirmButton: false,
+                text: '<?= $this->session->flashdata('success') ?>',
+                timer: 1500,
+            });
+        </script>
+    <?php endif; ?>
 
 </body>
 
