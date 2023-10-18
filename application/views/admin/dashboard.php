@@ -103,6 +103,40 @@
         font-size: 0.8em;
     }
 
+    .pagination {
+        display: flex;
+        margin: 0.5em auto;
+    }
+
+    .pagination a,
+    .pagination strong {
+        border: 1px solid silver;
+        border-radius: 8px;
+        color: black;
+        padding: 0.5em;
+        margin-right: 0.5em;
+        text-decoration: none;
+    }
+
+    .pagination a:hover,
+    .pagination strong {
+        border: 1px solid #a6d5cd;
+        background-color: #a6d5cd;
+        color: white;
+    }
+
+    .card2 h1 {
+        text-transform: capitalize;
+        margin-bottom: 1rem;
+        color: #314641;
+        font-size: 1.3em;
+    }
+
+    .img img {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -182,40 +216,6 @@
             color: #314641;
         }
 
-    }
-
-    .pagination {
-        display: flex;
-        margin: 0.5em auto;
-    }
-
-    .pagination a,
-    .pagination strong {
-        border: 1px solid silver;
-        border-radius: 8px;
-        color: black;
-        padding: 0.5em;
-        margin-right: 0.5em;
-        text-decoration: none;
-    }
-
-    .pagination a:hover,
-    .pagination strong {
-        border: 1px solid #a6d5cd;
-        background-color: #a6d5cd;
-        color: white;
-    }
-
-    .card2 h1 {
-        text-transform: capitalize;
-        margin-bottom: 1rem;
-        color: #314641;
-        font-size: 1.3em;
-    }
-
-    .img img {
-        width: 3.5rem;
-        height: 3.5rem;
     }
 </style>
 

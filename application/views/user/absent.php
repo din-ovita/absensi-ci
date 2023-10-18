@@ -69,8 +69,6 @@
         margin-top: 1rem;
     }
 
-
-
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -144,6 +142,7 @@
         </form>
     </section>
 
+    <!-- sweetalert succes  -->
     <?php if ($this->session->flashdata('success')) : ?>
         <script>
             Swal.fire({
@@ -156,6 +155,7 @@
         </script>
     <?php endif; ?>
 
+    <!-- sweeatalert validasi absen -->
     <script>
         function absen() {
             Swal.fire({

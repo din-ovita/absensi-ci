@@ -9,23 +9,32 @@ class Auth extends CI_Controller
 		$this->load->model('m_user');
 	}
 
+	// halaman home
 	public function index()
 	{
 		$data['title'] = 'Home Page';
-		$this->load->view('home', $data);
+		$this->load->view('component/home', $data);
 	}
+
+	// halaman login email
 	public function login()
 	{
-		$this->load->view('login');
+		$this->load->view('component/login');
 	}
+
+	// halaman login username
 	public function login_username()
 	{
-		$this->load->view('login_username');
+		$this->load->view('component/login_username');
 	}
+
+	// halaman register
 	public function register()
 	{
-		$this->load->view('register');
+		$this->load->view('component/register');
 	}
+
+	// aksi registrasi
 	public function aksi_register()
 	{
 		$password = md5($this->input->post("password"));
@@ -44,10 +53,11 @@ class Auth extends CI_Controller
 		$query = $this->m_user->cek('user', $email);
 		$result = $query->row_array();
 		var_dump($result);
+		// validasi jika email sudah digunakan
 		if ($result) {
 			$this->session->set_flashdata('error_message', 'The account already exists');
 			redirect(base_url('auth/register'));
-		} elseif (strlen($passwordk) >= 8 && empty($result)) {
+		} elseif (strlen($passwordk) >= 8 && empty($result)) { // validasi jika password kurang dari 8 karakter
 			$this->m_user->add('user', $data);
 			redirect(base_url('auth/login'));
 		} else {
@@ -56,6 +66,7 @@ class Auth extends CI_Controller
 		}
 	}
 
+	// aksi login dengan email
 	public function aksi_login_email()
 	{
 		$password = $this->input->post('password');
@@ -86,6 +97,8 @@ class Auth extends CI_Controller
 			redirect(base_url('auth/login'));
 		}
 	}
+
+	// aksi login dengan username
 	public function aksi_login_username()
 	{
 		$password = $this->input->post('password');
@@ -117,6 +130,7 @@ class Auth extends CI_Controller
 		}
 	}
 
+	// logout
 	function logout()
 	{
 		$this->session->sess_destroy();

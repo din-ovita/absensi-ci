@@ -142,6 +142,7 @@
         </form>
     </section>
 
+    <!-- sweetalert success -->
     <?php if ($this->session->flashdata('success')) : ?>
         <script>
             Swal.fire({
@@ -154,6 +155,7 @@
         </script>
     <?php endif; ?>
 
+    <!-- sweetalert validasi izin -->
     <script>
         function ijin() {
             Swal.fire({

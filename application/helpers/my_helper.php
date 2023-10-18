@@ -1,4 +1,5 @@
 <?php
+// get name from table user
 function name($id)
 {
     $ci = &get_instance();
@@ -10,6 +11,7 @@ function name($id)
     }
 }
 
+// get jam_pulang from table absensi
 function pulang($id)
 {
     $ci = &get_instance();
@@ -21,6 +23,7 @@ function pulang($id)
     }
 }
 
+// get keterangan_izin from table absensi
 function izin($id)
 {
     $ci = &get_instance();
@@ -32,6 +35,7 @@ function izin($id)
     }
 }
 
+// get date from table absensi
 function tgl($id)
 {
     $ci = &get_instance();

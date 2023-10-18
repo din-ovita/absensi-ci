@@ -242,7 +242,6 @@
         });
 
         function export_month() {
-
             var bulan = sessionStorage.getItem('bulan');
             window.location.href = '<?php echo base_url('admin/export_monthly_input/') ?>' + bulan;
         }

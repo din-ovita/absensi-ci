@@ -25,14 +25,6 @@
         height: 100%;
     }
 
-    /* nav ul li:nth-child(3),
-    nav ul li:nth-child(4),
-    nav ul li:nth-child(5),
-    nav ul li:nth-child(6),
-    nav ul li:nth-child(7) {
-        margin-top: 0.5rem;
-    } */
-
     nav ul li.active {
         background: #a6d5cd;
         width: 50px;
@@ -68,7 +60,6 @@
     nav ul li.active a span {
         font-size: 0.85em;
         text-align: center;
-        /* transform: translateY(px); */
     }
 
     .logout {
@@ -225,6 +216,7 @@
     </div>
 </nav>
 
+<!-- script tanggal & jam -->
 <script type="text/javascript">
     window.onload = function() {
         jam();

@@ -242,6 +242,8 @@
             </div>
         <?php endforeach ?>
     </section>
+
+    <!-- sweetalert success -->
     <?php if ($this->session->flashdata('succes')) : ?>
         <script>
             Swal.fire({
@@ -253,6 +255,8 @@
             });
         </script>
     <?php endif; ?>
+
+    <!-- sweetalert success -->
     <?php if ($this->session->flashdata('success')) : ?>
         <script>
             Swal.fire({
@@ -268,6 +272,7 @@
 </body>
 
 <script>
+    // kembali ke halaman sebelumnya
     function kembali() {
         window.history.go(-1);
     }

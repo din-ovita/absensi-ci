@@ -219,8 +219,7 @@
         </div>
     </section>
     <script>
-        function
-        all_export() {
+        function all_export() {
             window.location.href = '<?php echo base_url('admin/export') ?>';
         }
     </script>

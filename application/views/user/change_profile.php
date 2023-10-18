@@ -306,6 +306,7 @@
 </body>
 
 <script>
+    // kembali ke halaman sebelumnya
     function kembali() {
         window.history.go(-1);
     }

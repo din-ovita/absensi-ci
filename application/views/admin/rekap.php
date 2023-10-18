@@ -39,27 +39,7 @@
         background: #fff;
         filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
         padding: 1.5rem;
-        /* display: flex;
-        justify-content: space-between;
-        align-items: center; */
     }
-
-    /* section .box .card div h3 {
-        margin-bottom: 1rem;
-        text-transform: capitalize;
-        color: #314641;
-    }
-
-    section .box .card div p {
-        font-size: 1.5em;
-        font-weight: 500;
-        color: #314641;
-    }
-
-    section .box .card i {
-        font-size: 4rem;
-        color: #a6d5cd;
-    } */
 
     @media (min-width: 1200px) {
         section {

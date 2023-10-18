@@ -201,6 +201,7 @@
     </div>
 </nav>
 
+<!-- script tanggal & jam -->
 <script type="text/javascript">
     window.onload = function() {
         jam();

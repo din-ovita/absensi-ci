@@ -314,6 +314,7 @@
 </body>
 
 <script>
+    // function show password
     function togglePassword() {
         var passwordType = document.getElementById("new_password");
         var icon = document.getElementById("icon");
@@ -328,6 +329,7 @@
         }
     }
 
+    // function show password
     function togglePassword2() {
         var passwordType = document.getElementById("confirm_password");
         var icon = document.getElementById("icon2");
@@ -342,6 +344,7 @@
         }
     }
 
+    // kembali ke halaman sebelumnya
     function kembali() {
         window.history.go(-1);
     }

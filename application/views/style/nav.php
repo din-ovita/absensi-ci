@@ -1,10 +1,3 @@
-<style>
-    @media (min-width: 1200px) {
-        
-
-    }
-</style>
-
 <div class="nav">
     <ul>
         <li class="<?= $menu == 'profile' ? 'active' : '' ?>"><a href="<?php echo base_url('user/profile') ?>">My Profile</a>

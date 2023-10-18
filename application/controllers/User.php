@@ -7,12 +7,13 @@ class User extends CI_Controller
         $this->load->model("m_user");
         $this->load->library('upload');
         $this->load->helper('url');
-
+        // validasi login
         if ($this->session->userdata('logged_in') != 'login') {
             redirect(base_url() . 'auth');
         }
     }
 
+    // function upload gambar
     public function upload_img($value)
     {
         $kode = round(microtime(true) * 1000);
@@ -30,7 +31,7 @@ class User extends CI_Controller
         }
     }
 
-
+    // halaman dashboard user
     public function index()
     {
         $data = ['menu' => 'dashboard'];
@@ -48,6 +49,7 @@ class User extends CI_Controller
         $this->load->view('user/dashboard_user', $data);
     }
 
+    // halaman absen
     public function absent()
     {
         $data = ['menu' => 'absent'];
@@ -63,6 +65,7 @@ class User extends CI_Controller
         $this->load->view('user/absent', $data);
     }
 
+    // halaman history absen
     public function history()
     {
         $data = ['menu' => 'history'];
@@ -98,6 +101,7 @@ class User extends CI_Controller
         $this->load->view('user/history', $data);
     }
 
+    // halaman izin
     public function permission()
     {
         $data = ['menu' => 'permission'];
@@ -113,6 +117,7 @@ class User extends CI_Controller
         $this->load->view('user/permission', $data);
     }
 
+    // aksi absen
     public function aksi_absen()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -135,17 +140,18 @@ class User extends CI_Controller
         $query = $this->m_user->cek('absensi', $data);
         $res = $query->row_array();
 
-        if (empty($res)) {
+        if (empty($res)) { // validasi hari ini belum absen
             $this->m_user->add('absensi', $data1);
             $this->session->set_flashdata('succes', 'You have absent today');
             redirect(base_url('user/history'));
-        } else {
+        } else { // jika hari ini sudah absen, maka action menjadi edit
             $this->m_user->update('absensi', $data2, array('id' => $res['id']));
             $this->session->set_flashdata('success', 'Your daily activities have been updated');
             redirect(base_url('user/history'));
         }
     }
 
+    // aksi hapus absensi
     public function delete_absent($id)
     {
         $hapus = $this->m_user->delete('absensi', 'id', $id);
@@ -158,6 +164,7 @@ class User extends CI_Controller
         }
     }
 
+    // aksi izin
     public function aksi_izin()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -179,17 +186,18 @@ class User extends CI_Controller
         $query = $this->m_user->cek('absensi', $data);
         $res = $query->row_array();
 
-        if (empty($res)) {
+        if (empty($res)) { // validasi jika hari ini belum absen
             $this->m_user->add('absensi', $data2);
             $this->session->set_flashdata('success', 'You have permission today');
             redirect(base_url('user/history'));
-        } else {
+        } else { // jika hari ini ijin, maka menjadi update keterangan izin
             $this->m_user->update('absensi', $data1, array('id' => $res['id']));
             $this->session->set_flashdata('success', 'Your permission have been updated');
             redirect(base_url('user/history'));
         }
     }
 
+    // aksi pulang
     public function pulang()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -214,6 +222,7 @@ class User extends CI_Controller
         }
     }
 
+    // halaman profile
     public function profile()
     {
         $data1 = ['id' => $this->session->userdata('id')];
@@ -223,6 +232,7 @@ class User extends CI_Controller
         $this->load->view('user/profile', $data + $p);
     }
 
+    // halaman ubah profile
     public function change_profile()
     {
         $data1 = ['id' => $this->session->userdata('id')];
@@ -232,6 +242,7 @@ class User extends CI_Controller
         $this->load->view('user/change_profile', $data + $p);
     }
 
+    // halaman ubah password
     public function change_password()
     {
         $data1 = ['id' => $this->session->userdata('id')];
@@ -241,6 +252,7 @@ class User extends CI_Controller
         $this->load->view('user/change_password', $data + $p);
     }
 
+    // aksi ubah profile
     public function aksi_change_profile()
     {
         $username = $this->input->post('username');
@@ -280,6 +292,7 @@ class User extends CI_Controller
         }
     }
 
+    // aksi ubah password
     public function aksi_change_password()
     {
         $new_password = $this->input->post('new_password');
@@ -304,6 +317,7 @@ class User extends CI_Controller
         }
     }
 
+    // validasi edit
     public function validasi_edit()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -312,9 +326,9 @@ class User extends CI_Controller
         $where = ['date' => $date, 'id_karyawan' => $this->session->userdata('id')];
         $result = $this->m_user->get_data('absensi', $where)->row_array();
 
-        if ($result['keterangan_izin'] != '-') {
+        if ($result['keterangan_izin'] != '-') { // jika hari ini izin, maka menuju page permission, untuk update ket izin
             redirect(base_url('user/permission'));
-        } else {
+        } else { // jika hari ini absen, maka menuju page absen, untuk update kegiatan harian
             redirect(base_url('user/absent'));
         }
     }

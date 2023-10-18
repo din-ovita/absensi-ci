@@ -84,6 +84,28 @@
         font-size: 0.8em;
     }
 
+    
+    form input {
+        padding: 0.5rem;
+        background: #f4f4f4;
+        border: 1px solid #a6d5cd;
+        margin-top: 0.5rem;
+    }
+
+    button {
+        color: #fff;
+        background: #c7e4df;
+        border: none;
+        margin-top: 0.5rem;
+        margin-left: 0.4rem;
+        padding: 0.5rem 1rem;
+        font-size: 1em;
+    }
+
+    .export {
+        margin: 1rem 1rem;
+    }
+
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -135,27 +157,6 @@
             margin: 1rem 2rem;
         }
 
-    }
-
-    form input {
-        padding: 0.5rem;
-        background: #f4f4f4;
-        border: 1px solid #a6d5cd;
-        margin-top: 0.5rem;
-    }
-
-    button {
-        color: #fff;
-        background: #c7e4df;
-        border: none;
-        margin-top: 0.5rem;
-        margin-left: 0.4rem;
-        padding: 0.5rem 1rem;
-        font-size: 1em;
-    }
-
-    .export {
-        margin: 1rem 1rem;
     }
 </style>
 
@@ -228,7 +229,6 @@
 
         function export_today() {
             var hari = sessionStorage.getItem('date')
-
             window.location.href = '<?php echo base_url('admin/export_daily_input/') ?>' + hari;
         }
     </script>

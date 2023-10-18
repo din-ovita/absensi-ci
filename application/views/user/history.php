@@ -130,6 +130,10 @@
         background: transparent;
     }
 
+    .style {
+        z-index: 20;
+    }
+
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -198,9 +202,6 @@
             background: transparent;
         }
     }
-    .style {
-        z-index: 20;
-    }
 </style>
 
 <body>
@@ -238,7 +239,7 @@
                                     <td><?php echo $row->keterangan_izin ?></td>
                                     <td class="aksi">
                                         <a href="<?php echo base_url('user/validasi_edit') ?>"><i class="fas fa-edit"></i></a>
-                                        <?php         date_default_timezone_set('Asia/Jakarta'); $tgl = date('Y-m-d')?>
+                                        <?php date_default_timezone_set('Asia/Jakarta'); $tgl = date('Y-m-d')?>
                                         <?php if (empty(pulang($row->id)) && izin($row->id) == '-' && tgl($row->id) == $tgl) : ?>
                                             <a href="<?php echo base_url('user/pulang') ?>"><i class="fas fa-home"></i></a>
                                         <?php else : ?>
@@ -259,6 +260,7 @@
         </div>
     </section>
 
+    <!-- sweetalert success -->
     <?php if ($this->session->flashdata('succes')) : ?>
         <script>
             Swal.fire({
@@ -270,6 +272,8 @@
             });
         </script>
     <?php endif; ?>
+
+    <!-- sweetalert success -->
     <?php if ($this->session->flashdata('success')) : ?>
         <script>
             Swal.fire({
@@ -282,6 +286,7 @@
         </script>
     <?php endif; ?>
 
+    <!-- sweetalert confirm delete -->
     <script>
         function hapus(id) {
             Swal.fire({
