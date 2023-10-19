@@ -34,6 +34,12 @@ class Auth extends CI_Controller
 		$this->load->view('component/register');
 	}
 
+	// halaman register admin
+	public function register_admin()
+	{
+		$this->load->view('component/register_admin');
+	}
+
 	// aksi registrasi
 	public function aksi_register()
 	{
@@ -56,7 +62,7 @@ class Auth extends CI_Controller
 		$username = ['username' => $this->input->post('username')];
 		$query2 = $this->m_user->cek('user', $username);
 		$res = $query2->row_array();
-		
+
 		if ($res) { // validasi jika username sudah digunakan
 			$this->session->set_flashdata('error_message', 'The account already exists');
 			redirect(base_url('auth/register'));
@@ -71,6 +77,45 @@ class Auth extends CI_Controller
 			redirect(base_url('auth/register'));
 		}
 	}
+
+	// aksi registrasi
+	public function aksi_register_admin()
+	{
+		$password = md5($this->input->post("password"));
+		$passwordk = $this->input->post("password");
+
+		$data = [
+			'username' => $this->input->post('username'),
+			'email' => $this->input->post('email'),
+			'nama_depan' => $this->input->post('nama_depan'),
+			'nama_belakang' => $this->input->post('nama_belakang'),
+			'password' => $password,
+			'role' => 'admin',
+			'image' => 'user_picture.jpg'
+		];
+		$email = ['email' => $this->input->post('email')];
+		$query = $this->m_user->cek('user', $email);
+		$result = $query->row_array();
+
+		$username = ['username' => $this->input->post('username')];
+		$query2 = $this->m_user->cek('user', $username);
+		$res = $query2->row_array();
+
+		if ($res) { // validasi jika username sudah digunakan
+			$this->session->set_flashdata('error_message', 'The account already exists');
+			redirect(base_url('auth/register_admin'));
+		} elseif ($result) { // validasi jika email sudah digunakan
+			$this->session->set_flashdata('error_message', 'The account already exists');
+			redirect(base_url('auth/register_admin'));
+		} elseif (strlen($passwordk) >= 8 && empty($result)) { // validasi jika password kurang dari 8 karakter
+			$this->m_user->add('user', $data);
+			redirect(base_url('auth/login'));
+		} else {
+			$this->session->set_flashdata('error_message', 'Password must be at least 8 characters');
+			redirect(base_url('auth/register_admin'));
+		}
+	}
+
 
 	// aksi login dengan email
 	public function aksi_login_email()

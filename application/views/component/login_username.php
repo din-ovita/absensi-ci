@@ -334,6 +334,7 @@
             </div>
         </div>
     </section>
+    
     <?php if ($this->session->flashdata('error_message')) : ?>
         <script>
             Swal.fire({
@@ -345,6 +346,7 @@
             });
         </script>
     <?php endif; ?>
+
     <?php if ($this->session->flashdata('message')) : ?>
         <script>
             Swal.fire({
@@ -356,6 +358,7 @@
             });
         </script>
     <?php endif; ?>
+
     <script>
         function togglePassword() {
             var passwordType = document.getElementById("password");
