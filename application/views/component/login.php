@@ -34,13 +34,13 @@
 
     .box {
         background: #a6d5cd;
-        padding: 30px 50px;
+        padding: 30px;
         border-top-right-radius: 50px;
     }
 
     .input-group {
         position: relative;
-        width: 300px;
+        width: 250px;
         margin-top: 25px;
     }
 
@@ -155,6 +155,20 @@
 
     .login_username a:hover {
         text-decoration: underline;
+    }
+
+    @media (min-width: 1200px) {
+        .box {
+            background: #a6d5cd;
+            padding: 30px 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .input-group {
+            position: relative;
+            width: 300px;
+            margin-top: 25px;
+        }
     }
 </style>
 

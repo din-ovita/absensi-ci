@@ -34,14 +34,14 @@
 
     .box {
         background: #a6d5cd;
-        padding: 30px 50px;
+        padding: 30px;
         border-top-right-radius: 50px;
         border-bottom-left-radius: 50px;
     }
 
     .input-group {
         position: relative;
-        width: 300px;
+        width: 250px;
         margin-top: 25px;
     }
 
@@ -156,6 +156,142 @@
 
     .login_username a:hover {
         text-decoration: underline;
+    }
+
+    @media (min-width: 1200px) {
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ebf5f6;
+            min-height: 100vh;
+        }
+
+        .box {
+            background: #a6d5cd;
+            padding: 30px 50px;
+            border-top-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+
+        .input-group {
+            position: relative;
+            width: 300px;
+            margin-top: 25px;
+        }
+
+        .input-group input {
+            position: relative;
+            width: 100%;
+            padding: 15px 10px 10px;
+            background: transparent;
+            outline: none;
+            box-shadow: none;
+            color: #fff;
+            font-size: 1em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            z-index: 10;
+            border: none;
+        }
+
+        .input-group span {
+            position: absolute;
+            left: 0;
+            padding: 15px 10px 10px;
+            pointer-events: none;
+            color: #fff;
+            font-size: 1em;
+            letter-spacing: 0.05em;
+            transition: 0.05s;
+        }
+
+        .input-group input:valid~span,
+        .input-group input:focus~span {
+            color: #fff;
+            font-size: 0.85em;
+            transform: translateY(-24px);
+        }
+
+        .input-group b {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: #fff;
+            border-radius: 4px;
+            height: 2px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .input-group .password {
+            position: absolute;
+            right: 10px;
+            bottom: 25%;
+            color: #fff;
+            cursor: pointer;
+            z-index: 11;
+        }
+
+        .sign-in {
+            padding-top: 10px;
+            width: 100%;
+        }
+
+        .box h2 {
+            font-family: 'Marck Script', cursive;
+            color: #fff;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .box p {
+            color: #fff;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .sign-in button {
+            color: #fff;
+            font-weight: 600;
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 20px;
+            border: 3px solid #fff;
+            background: transparent;
+            font-size: 1.05em;
+        }
+
+        .sign-in button:focus {
+            outline: none;
+        }
+
+        .box form p {
+            font-size: 0.95em;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .box form p a {
+            color: #fff;
+            outline: none;
+        }
+
+        .login_username {
+            margin-top: 50px;
+        }
+
+        .login_username a {
+            text-decoration: none;
+            color: #fff;
+            outline: none;
+        }
+
+        .login_username a:hover {
+            text-decoration: underline;
+        }
     }
 </style>
 

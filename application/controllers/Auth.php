@@ -52,9 +52,15 @@ class Auth extends CI_Controller
 		$email = ['email' => $this->input->post('email')];
 		$query = $this->m_user->cek('user', $email);
 		$result = $query->row_array();
-		var_dump($result);
-		// validasi jika email sudah digunakan
-		if ($result) {
+
+		$username = ['username' => $this->input->post('username')];
+		$query2 = $this->m_user->cek('user', $username);
+		$res = $query2->row_array();
+		
+		if ($res) { // validasi jika username sudah digunakan
+			$this->session->set_flashdata('error_message', 'The account already exists');
+			redirect(base_url('auth/register'));
+		} elseif ($result) { // validasi jika email sudah digunakan
 			$this->session->set_flashdata('error_message', 'The account already exists');
 			redirect(base_url('auth/register'));
 		} elseif (strlen($passwordk) >= 8 && empty($result)) { // validasi jika password kurang dari 8 karakter

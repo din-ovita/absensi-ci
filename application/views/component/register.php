@@ -20,10 +20,6 @@
         font-family: 'Montserrat', sans-serif;
     }
 
-    body {
-        overflow: hidden;
-    }
-
     section {
         display: flex;
         justify-content: center;
@@ -34,13 +30,14 @@
 
     .box {
         background: #a6d5cd;
-        padding: 30px 50px;
+        padding: 30px;
         border-top-left-radius: 50px;
+        margin: 1rem;
     }
 
     .input-group {
         position: relative;
-        width: 300px;
+        width: 250px;
         margin-top: 25px;
     }
 
@@ -141,6 +138,29 @@
     .box form p a {
         color: #fff;
         outline: none;
+    }
+
+    @media (min-width: 1200px) {
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ebf5f6;
+            min-height: 100vh;
+        }
+
+        .box {
+            background: #a6d5cd;
+            padding: 30px 50px;
+            margin: auto;
+            border-top-left-radius: 50px;
+        }
+
+        .input-group {
+            position: relative;
+            width: 300px;
+            margin-top: 25px;
+        }
     }
 </style>
 
