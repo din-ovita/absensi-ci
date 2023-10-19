@@ -28,7 +28,7 @@
         align-items: center;
         background: white;
         min-height: 100vh;
-        background: #ebf5f6;
+        background: #e0ceff;
         padding: 5rem 0;
     }
 
@@ -79,7 +79,8 @@
         font-weight: 600;
         padding: 10px 50px;
         border-radius: 20px;
-        background: #a6d5cd;
+        background: #593f86
+;
     }
 
     section .color:nth-child(1) {

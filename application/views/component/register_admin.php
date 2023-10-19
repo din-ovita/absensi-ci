@@ -24,12 +24,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #ebf5f6;
+        background: #e0ceff;
         min-height: 100vh;
     }
 
     .box {
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 30px;
         border-top-left-radius: 50px;
         margin: 1rem;
@@ -145,12 +146,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #ebf5f6;
+            background: #e0ceff;
             min-height: 100vh;
         }
 
         .box {
-            background: #a6d5cd;
+            background: #593f86
+;
             padding: 30px 50px;
             margin: auto;
             border-top-left-radius: 50px;

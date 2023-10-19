@@ -16,7 +16,8 @@
     }
 
     .nav h2 {
-        color: #a6d5cd;
+        color: #593f86
+;
     }
 
     .profile a img {
@@ -39,7 +40,8 @@
         }
 
         .nav h2 {
-            color: #a6d5cd;
+            color: #593f86
+;
         }
 
         .profile a img {

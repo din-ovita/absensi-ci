@@ -19,7 +19,8 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        background: #a6d5cd;
+        background: #593f86
+;
         color: #fff;
         padding: 3.5rem 2rem;
         border-bottom-left-radius: 6rem;
@@ -43,7 +44,7 @@
         position: absolute;
         right: 0;
         bottom: -2.5rem;
-        background: #c7e4df;
+        background: #a568cc;
         padding: 1rem 2rem;
         border-top-left-radius: 5rem;
         border-bottom-left-radius: 5rem;
@@ -93,7 +94,8 @@
     }
 
     .card label {
-        color: #a6d5cd;
+        color: #593f86
+;
     }
 
     .card input {
@@ -103,11 +105,13 @@
         padding: 0.2rem 0.5rem;
         margin-top: 0.5rem;
         background: #f4f4f4;
-        border: 1px solid #a6d5cd;
+        border: 1px solid #593f86
+;
     }
 
     .card input:focus {
-        outline: 2px solid #a6d5cd;
+        outline: 2px solid #593f86
+;
     }
 
     .img input {
@@ -129,7 +133,8 @@
     .button button {
         padding: 0.5rem 3rem;
         color: #fff;
-        background: #a6d5cd;
+        background: #593f86
+;
         border: none;
         font-size: 1em;
         font-weight: 500;
@@ -142,7 +147,8 @@
             position: relative;
             display: flex;
             flex-direction: row;
-            background: #a6d5cd;
+            background: #593f86
+;
             color: #fff;
             padding: 2rem 7rem 4rem 7rem;
             border-bottom-left-radius: 5rem;
@@ -166,7 +172,7 @@
             position: absolute;
             right: 0;
             bottom: -2.5rem;
-            background: #c7e4df;
+            background: #a568cc;
             padding: 2rem;
             border-top-left-radius: 5rem;
             border-bottom-left-radius: 5rem;
@@ -218,7 +224,8 @@
         }
 
         .card label {
-            color: #a6d5cd;
+            color: #593f86
+;
         }
 
         .card input {
@@ -228,11 +235,13 @@
             padding: 0.2rem 0.5rem;
             margin-top: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #a6d5cd;
+            border: 1px solid #593f86
+;
         }
 
         .card input:focus {
-            outline: 2px solid #a6d5cd;
+            outline: 2px solid #593f86
+;
         }
 
         .img input {
@@ -254,7 +263,8 @@
         .button button {
             padding: 0.8rem 5rem;
             color: #fff;
-            background: #a6d5cd;
+            background: #593f86
+;
             border: none;
             font-size: 1em;
             font-weight: 500;

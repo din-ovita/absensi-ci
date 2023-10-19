@@ -58,7 +58,8 @@
 
     section .box .card i {
         font-size: 4rem;
-        color: #a6d5cd;
+        color: #593f86
+;
     }
 
     section .box2 {
@@ -120,8 +121,10 @@
 
     .pagination a:hover,
     .pagination strong {
-        border: 1px solid #a6d5cd;
-        background-color: #a6d5cd;
+        border: 1px solid #593f86
+;
+        background-color: #593f86
+;
         color: white;
     }
 
@@ -167,7 +170,8 @@
 
         section .box .card i {
             font-size: 5rem;
-            color: #a6d5cd;
+            color: #593f86
+;
         }
 
         section .card2 {
@@ -201,7 +205,8 @@
 
         section .card h1 {
             color: #fff;
-            background: #a6d5cd;
+            background: #593f86
+;
             padding: 1rem 2rem;
         }
 

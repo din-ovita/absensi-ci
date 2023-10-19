@@ -39,16 +39,19 @@
         padding: 0.5rem;
         font-size: 0.85em;
         background: #f4f4f4;
-        border: 1px solid #a6d5cd;
+        border: 1px solid #593f86
+;
     }
 
     section form textarea:focus {
-        outline: 2px solid #a6d5cd;
+        outline: 2px solid #593f86
+;
     }
 
     section form h1 {
         color: #fff;
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 0.75rem 1rem;
     }
 
@@ -61,7 +64,8 @@
 
     section form button {
         border: none;
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 0.4rem 3rem;
         font-size: 1em;
         color: #fff;
@@ -87,7 +91,8 @@
 
         section form h1 {
             color: #fff;
-            background: #a6d5cd;
+            background: #593f86
+;
             padding: 1rem 2rem;
         }
 
@@ -98,7 +103,8 @@
 
         section form button {
             border: none;
-            background: #a6d5cd;
+            background: #593f86
+;
             padding: 0.8rem 3rem;
             font-size: 1em;
             color: #fff;

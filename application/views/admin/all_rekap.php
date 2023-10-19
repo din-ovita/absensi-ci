@@ -41,7 +41,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 0.75rem 1rem;
     }
 
@@ -86,7 +87,7 @@
 
     button {
         color: #fff;
-        background: #c7e4df;
+        background: #a568cc;
         border: none;
         margin-top: 0.5rem;
         margin-left: 0.4rem;
@@ -111,8 +112,10 @@
 
     .pagination a:hover,
     .pagination strong {
-        border: 1px solid #a6d5cd;
-        background-color: #a6d5cd;
+        border: 1px solid #593f86
+;
+        background-color: #593f86
+;
         color: white;
     }
 

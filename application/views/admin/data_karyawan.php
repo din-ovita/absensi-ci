@@ -38,7 +38,8 @@
     }
 
     section .card .header {
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 0.75rem 1rem;
         display: flex;
         justify-content: space-between;
@@ -81,7 +82,7 @@
 
     button {
         color: #fff;
-        background: #c7e4df;
+        background: #a568cc;
         border: none;
         margin-left: 1rem;
         padding: 0.5rem 1.5rem;
@@ -156,8 +157,10 @@
 
     .pagination a:hover,
     .pagination strong {
-        border: 1px solid #a6d5cd;
-        background-color: #a6d5cd;
+        border: 1px solid #593f86
+;
+        background-color: #593f86
+;
         color: white;
     }
 

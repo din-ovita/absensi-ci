@@ -297,12 +297,22 @@ class User extends CI_Controller
     {
         $new_password = $this->input->post('new_password');
         $confirm_password = $this->input->post('confirm_password');
+        $old_password = $this->input->post('old_password');
+
+        $data1 = ['id' => $this->session->userdata('id')];
+        $query = $this->m_user->cek('user', $data1);
+        $user = $query->result();
 
         if (!empty($new_password)) {
-            if ($new_password === $confirm_password) {
-                $data['password'] = md5($new_password);
+            if ($old_password === md5($user->password)) {
+                if ($new_password === $confirm_password) {
+                    $data['password'] = md5($new_password);
+                } else {
+                    $this->session->set_flashdata('message', 'The new password and confirmed password must be the same!');
+                    redirect(base_url('user/change_password'));
+                }
             } else {
-                $this->session->set_flashdata('message', 'The new password and confirmed password must be the same!');
+                $this->session->set_flashdata('message', 'The old password not same!');
                 redirect(base_url('user/change_password'));
             }
         }

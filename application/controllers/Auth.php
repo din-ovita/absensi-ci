@@ -64,10 +64,10 @@ class Auth extends CI_Controller
 		$res = $query2->row_array();
 
 		if ($res) { // validasi jika username sudah digunakan
-			$this->session->set_flashdata('error_message', 'The account already exists');
+			$this->session->set_flashdata('error_message', 'The username is already exists');
 			redirect(base_url('auth/register'));
 		} elseif ($result) { // validasi jika email sudah digunakan
-			$this->session->set_flashdata('error_message', 'The account already exists');
+			$this->session->set_flashdata('error_message', 'The email is already exists');
 			redirect(base_url('auth/register'));
 		} elseif (strlen($passwordk) >= 8 && empty($result)) { // validasi jika password kurang dari 8 karakter
 			$this->m_user->add('user', $data);
@@ -102,10 +102,10 @@ class Auth extends CI_Controller
 		$res = $query2->row_array();
 
 		if ($res) { // validasi jika username sudah digunakan
-			$this->session->set_flashdata('error_message', 'The account already exists');
+			$this->session->set_flashdata('error_message', 'The username is already exists');
 			redirect(base_url('auth/register_admin'));
 		} elseif ($result) { // validasi jika email sudah digunakan
-			$this->session->set_flashdata('error_message', 'The account already exists');
+			$this->session->set_flashdata('error_message', 'The email is already exists');
 			redirect(base_url('auth/register_admin'));
 		} elseif (strlen($passwordk) >= 8 && empty($result)) { // validasi jika password kurang dari 8 karakter
 			$this->m_user->add('user', $data);
@@ -121,18 +121,10 @@ class Auth extends CI_Controller
 	public function aksi_login_email()
 	{
 		$password = $this->input->post('password');
-		$konfirmasi_password = $this->input->post('confirm_password');
-		$data = ['email' => $this->input->post('email')];
-		if (!empty($password)) {
-			if ($password === $konfirmasi_password) {
-				$data['password'] = md5($password);
-			} else {
-				$this->session->set_flashdata('message', 'The password and confirmed password must be the same!');
-				redirect(base_url('auth/login'));
-			}
-		}
+		$data = ['email' => $this->input->post('email'), 'password' => md5($password)];
 		$query = $this->m_user->cek('user', $data);
 		$res = $query->row_array();
+
 		if ($query->num_rows() == 1) {
 			$data_session = ["id" => $res['id'], "username" => $res['username'], "email" => $res['email'], "first_name" => $res['nama_depan'], "last_name" => $res['nama_belakang'], "role" => $res['role'], 'logged_in' => 'login'];
 			$data_session['login'] = "login";
@@ -153,16 +145,7 @@ class Auth extends CI_Controller
 	public function aksi_login_username()
 	{
 		$password = $this->input->post('password');
-		$konfirmasi_password = $this->input->post('confirm_password');
-		$data = ['username' => $this->input->post('username')];
-		if (!empty($password)) {
-			if ($password === $konfirmasi_password) {
-				$data['password'] = md5($password);
-			} else {
-				$this->session->set_flashdata('message', 'The password and confirmed password must be the same!');
-				redirect(base_url('auth/login'));
-			}
-		}
+		$data = ['username' => $this->input->post('username'), 'password' => md5($password)];
 		$query = $this->m_user->cek('user', $data);
 		$res = $query->row_array();
 		if ($query->num_rows() == 1) {

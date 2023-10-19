@@ -19,7 +19,8 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        background: #a6d5cd;
+        background: #593f86
+;
         color: #fff;
         padding: 3.5rem 2rem;
         border-bottom-left-radius: 6rem;
@@ -43,7 +44,7 @@
         position: absolute;
         right: 0;
         bottom: -2.5rem;
-        background: #c7e4df;
+        background: #a568cc;
         padding: 1rem 2rem;
         border-top-left-radius: 5rem;
         border-bottom-left-radius: 5rem;
@@ -88,7 +89,8 @@
     }
 
     .box .card h3 {
-        color: #a6d5cd;
+        color: #593f86
+;
         width: 35%;
         font-size: 1.05em;
     }
@@ -127,7 +129,8 @@
             position: relative;
             display: flex;
             flex-direction: row;
-            background: #a6d5cd;
+            background: #593f86
+;
             color: #fff;
             padding: 2rem 7rem 4rem 7rem;
             border-bottom-left-radius: 5rem;
@@ -151,7 +154,7 @@
             position: absolute;
             right: 0;
             bottom: -2.5rem;
-            background: #c7e4df;
+            background: #a568cc;
             padding: 2rem;
             border-top-left-radius: 5rem;
             border-bottom-left-radius: 5rem;
@@ -198,7 +201,8 @@
         }
 
         .box .card h3 {
-            color: #a6d5cd;
+            color: #593f86
+;
             width: 35%;
         }
 

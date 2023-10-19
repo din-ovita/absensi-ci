@@ -8,7 +8,8 @@
         position: fixed;
         bottom: 0;
         width: 100%;
-        background: #a6d5cd;
+        background: #593f86
+;
         height: 5rem;
     }
 
@@ -26,7 +27,8 @@
     }
 
     nav ul li.active {
-        background: #a6d5cd;
+        background: #593f86
+;
         width: 50px;
         height: 50px;
         border: 6px solid #fff;
@@ -85,7 +87,8 @@
             bottom: 0;
             width: 15rem;
             height: 100%;
-            background: #a6d5cd;
+            background: #593f86
+;
         }
 
         nav ul {
@@ -123,7 +126,8 @@
         }
 
         nav ul li.active a {
-            color: #a6d5cd;
+            color: #593f86
+;
         }
 
         nav ul li a i {
@@ -157,14 +161,14 @@
 
         .logout a {
             text-decoration: none;
-            color: #000;
+            color: #fff;
             text-transform: uppercase;
             font-weight: 500;
         }
 
         .logout a i {
             font-size: 1.3em;
-            color: red;
+            color: #fff;
             margin-top: 0.3rem;
             margin-right: 0.5rem;
         }

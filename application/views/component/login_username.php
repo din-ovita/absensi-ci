@@ -28,12 +28,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #ebf5f6;
+        background: #e0ceff;
         min-height: 100vh;
     }
 
     .box {
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 30px;
         border-top-right-radius: 50px;
         border-bottom-left-radius: 50px;
@@ -163,12 +164,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #ebf5f6;
+            background: #e0ceff;
             min-height: 100vh;
         }
 
         .box {
-            background: #a6d5cd;
+            background: #593f86
+;
             padding: 30px 50px;
             border-top-right-radius: 50px;
             border-bottom-left-radius: 50px;
@@ -315,14 +317,6 @@
                             <i class="fas fa-eye-slash" onclick="togglePassword()" id="icon"></i>
                         </div>
                     </div>
-                    <div class="input-group">
-                        <input type="password" id="password2" required name="confirm_password">
-                        <span for="">Confirm Password</span>
-                        <b></b>
-                        <div class="password">
-                            <i class="fas fa-eye-slash" onclick="togglePassword2()" id="icon2"></i>
-                        </div>
-                    </div>
                     <div class="login_username">
                         <a href="<?php echo base_url('auth/login') ?>">Login with email</a>
                     </div>
@@ -363,20 +357,6 @@
         function togglePassword() {
             var passwordType = document.getElementById("password");
             var icon = document.getElementById("icon");
-            if (passwordType.type === "password") {
-                passwordType.type = "text";
-                icon.classList.remove("fa-eye-slash");
-                icon.classList.add("fa-eye");
-            } else {
-                passwordType.type = "password";
-                icon.classList.remove("fa-eye");
-                icon.classList.add("fa-eye-slash");
-            }
-        }
-
-        function togglePassword2() {
-            var passwordType = document.getElementById("password2");
-            var icon = document.getElementById("icon2");
             if (passwordType.type === "password") {
                 passwordType.type = "text";
                 icon.classList.remove("fa-eye-slash");

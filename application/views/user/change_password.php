@@ -19,7 +19,7 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        background: #a6d5cd;
+        background: #593f86;
         color: #fff;
         padding: 3.5rem 2rem;
         border-bottom-left-radius: 6rem;
@@ -43,7 +43,7 @@
         position: absolute;
         right: 0;
         bottom: -2.5rem;
-        background: #c7e4df;
+        background: #a568cc;
         padding: 1rem 2rem;
         border-top-left-radius: 5rem;
         border-bottom-left-radius: 5rem;
@@ -94,7 +94,7 @@
     }
 
     .card label {
-        color: #a6d5cd;
+        color: #593f86;
     }
 
     .card input {
@@ -106,7 +106,7 @@
         padding: 0.2rem 0.5rem;
         margin-top: 0.5rem;
         background: #f4f4f4;
-        border: 1px solid #a6d5cd;
+        border: 1px solid #593f86;
     }
 
     .card .password {
@@ -120,7 +120,7 @@
 
 
     .card input:focus {
-        outline: 2px solid #a6d5cd;
+        outline: 2px solid #593f86;
     }
 
     .button {
@@ -131,7 +131,7 @@
     .button button {
         padding: 0.5rem 3rem;
         color: #fff;
-        background: #a6d5cd;
+        background: #593f86;
         border: none;
         font-size: 1em;
         font-weight: 500;
@@ -144,7 +144,7 @@
             position: relative;
             display: flex;
             flex-direction: row;
-            background: #a6d5cd;
+            background: #593f86;
             color: #fff;
             padding: 2rem 7rem 4rem 7rem;
             border-bottom-left-radius: 5rem;
@@ -168,7 +168,7 @@
             position: absolute;
             right: 0;
             bottom: -2.5rem;
-            background: #c7e4df;
+            background: #a568cc;
             padding: 2rem;
             border-top-left-radius: 5rem;
             border-bottom-left-radius: 5rem;
@@ -220,7 +220,7 @@
         }
 
         .card label {
-            color: #a6d5cd;
+            color: #593f86;
         }
 
         .card input {
@@ -230,11 +230,11 @@
             padding: 0.2rem 0.5rem;
             margin-top: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #a6d5cd;
+            border: 1px solid #593f86;
         }
 
         .card input:focus {
-            outline: 2px solid #a6d5cd;
+            outline: 2px solid #593f86;
         }
 
         .img input {
@@ -256,7 +256,7 @@
         .button button {
             padding: 0.8rem 5rem;
             color: #fff;
-            background: #a6d5cd;
+            background: #593f86;
             border: none;
             font-size: 1em;
             font-weight: 500;
@@ -277,15 +277,22 @@
             <form class="box" action="<?php echo base_url('user/aksi_change_password') ?>" method="post" enctype="multipart/form-data">
                 <div class="box2">
                     <div class="card">
-                        <label for="">New Password</label>
-                        <input type="password" name="new_password" placeholder="New Password" id="new_password">
+                        <label for="">Old Password</label>
+                        <input type="password" name="old_password" placeholder="Old Password" id="old_password" required>
                         <div class="password">
                             <i class="fas fa-eye-slash" onclick="togglePassword()" id="icon"></i>
                         </div>
                     </div>
                     <div class="card">
-                        <label for="">Confirm Password</label>
-                        <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password">
+                        <label for="">New Password</label>
+                        <input type="password" name="new_password" placeholder="New Password" id="new_password" required>
+                        <div class="password">
+                            <i class="fas fa-eye-slash" onclick="togglePassword3()" id="icon3"></i>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <label for="">Confirm New Password</label>
+                        <input type="password" name="confirm_password" placeholder="Confirm New Password" id="confirm_password" required>
                         <div class="password">
                             <i class="fas fa-eye-slash" onclick="togglePassword2()" id="icon2"></i>
                         </div>
@@ -316,7 +323,7 @@
 <script>
     // function show password
     function togglePassword() {
-        var passwordType = document.getElementById("new_password");
+        var passwordType = document.getElementById("old_password");
         var icon = document.getElementById("icon");
         if (passwordType.type === "password") {
             passwordType.type = "text";
@@ -333,6 +340,20 @@
     function togglePassword2() {
         var passwordType = document.getElementById("confirm_password");
         var icon = document.getElementById("icon2");
+        if (passwordType.type === "password") {
+            passwordType.type = "text";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        } else {
+            passwordType.type = "password";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        }
+    }
+
+    function togglePassword3() {
+        var passwordType = document.getElementById("new_password");
+        var icon = document.getElementById("icon3");
         if (passwordType.type === "password") {
             passwordType.type = "text";
             icon.classList.remove("fa-eye-slash");

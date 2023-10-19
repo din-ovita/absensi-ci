@@ -34,7 +34,8 @@
 
     section .card h1 {
         color: #fff;
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 0.75rem 1rem;
     }
 
@@ -171,7 +172,8 @@
 
         section .card h1 {
             color: #fff;
-            background: #a6d5cd;
+            background: #593f86
+;
             padding: 1rem 2rem;
         }
 

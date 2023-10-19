@@ -41,7 +41,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #a6d5cd;
+        background: #593f86
+;
         padding: 1rem;
     }
 
@@ -88,13 +89,14 @@
     form input {
         padding: 0.5rem;
         background: #f4f4f4;
-        border: 1px solid #a6d5cd;
+        border: 1px solid #593f86
+;
         margin-top: 0.5rem;
     }
 
     button {
         color: #fff;
-        background: #c7e4df;
+        background: #a568cc;
         border: none;
         margin-top: 0.5rem;
         margin-left: 0.4rem;
@@ -145,7 +147,8 @@
         form input {
             padding: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #a6d5cd;
+            border: 1px solid #593f86
+;
             margin-top: 0.5rem;
         }
 
