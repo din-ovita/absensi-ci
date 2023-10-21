@@ -303,7 +303,7 @@
             <div class="container">
                 <h2>Login</h2>
                 <p>Sign in to continue</p>
-                <form action="<?php echo base_url('auth/aksi_login_username') ?>" enctype="multipart/form-data" method="post">
+                <form action="<?php echo base_url('auth/aksi_login_username') ?>" enctype="multipart/form-data" method="post"  autocomplete="off">
                     <div class="input-group">
                         <input type="text" required name="username">
                         <span for="">Username</span>

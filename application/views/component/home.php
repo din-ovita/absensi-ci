@@ -88,7 +88,7 @@
         bottom: 0;
         width: 350px;
         height: 350px;
-        background: #deeeee;
+        background: #ceb4fc;
         border-radius: 50%;
     }
 
@@ -99,7 +99,7 @@
             right: 180px;
             width: 350px;
             height: 540px;
-            background: #deeeee;
+            background: #ceb4fc;
             border-top-left-radius: 200px;
             border-top-right-radius: 200px;
         }

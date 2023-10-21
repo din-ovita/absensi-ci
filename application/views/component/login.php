@@ -179,7 +179,7 @@
             <div class="container">
                 <h2>Login</h2>
                 <p>Sign in to continue</p>
-                <form action="<?php echo base_url('auth/aksi_login_email') ?>" enctype="multipart/form-data" method="post">
+                <form action="<?php echo base_url('auth/aksi_login_email') ?>" enctype="multipart/form-data" method="post" autocomplete="off">
                     <div class="input-group">
                         <input type="email" required name="email">
                         <span for="">Email</span>

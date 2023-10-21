@@ -38,8 +38,7 @@
     }
 
     section .card .header {
-        background: #593f86
-;
+        background: #593f86;
         padding: 0.75rem 1rem;
         display: flex;
         justify-content: space-between;
@@ -135,7 +134,7 @@
         }
 
         section .card .header {
-            padding: 0.75rem 2rem;
+            padding: 1rem 2rem;
         }
 
     }
@@ -157,10 +156,8 @@
 
     .pagination a:hover,
     .pagination strong {
-        border: 1px solid #593f86
-;
-        background-color: #593f86
-;
+        border: 1px solid #593f86;
+        background-color: #593f86;
         color: white;
     }
 
@@ -171,6 +168,29 @@
 
     .style {
         z-index: 20;
+    }
+
+    .aksi{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .aksi button:nth-child(1) {
+        background: transparent;
+        color: #2563eb;
+        padding: 0;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+    .aksi button:nth-child(2) {
+        background: transparent;
+        color: #dc2626;
+        padding: 0;
+        font-size: 1.5em;
+        cursor: pointer;
     }
 </style>
 
@@ -195,6 +215,7 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th class="full">Full Name</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -206,6 +227,10 @@
                                     <td><?php echo $row->username ?></td>
                                     <td><?php echo $row->email ?></td>
                                     <td><?php echo $row->nama_depan ?> <?php echo $row->nama_belakang ?></td>
+                                    <td class="aksi">
+                                        <button onclick="edit(<?php echo $row->id ?>)"><i class="fas fa-info-circle"></i></button>
+                                        <button onclick="hapus(<?php echo $row->id ?>)"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                         <?php else : ?>
@@ -227,6 +252,34 @@
     <script>
         function export_karyawan() {
             window.location.href = '<?php echo base_url('admin/export_karyawan') ?>';
+        }
+
+        function hapus(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setTimeout(function() {
+                        window.location.href = "<?php echo base_url('admin/delete_karyawan') ?>" + "/" + id;
+                    }, 1500);
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'Your data has been deleted.',
+                        icon: 'success',
+                        showConfirmButton: false
+                    })
+                }
+            })
+        }
+
+        function edit(id) {
+            window.location.href = "<?php echo base_url('admin/detail_user') ?>" + "/" + id;
         }
     </script>
 

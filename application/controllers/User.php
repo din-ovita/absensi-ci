@@ -312,7 +312,7 @@ class User extends CI_Controller
                     redirect(base_url('user/change_password'));
                 }
             } else {
-                $this->session->set_flashdata('message', 'The old password not same!');
+                $this->session->set_flashdata('message', 'The old password is wrong!');
                 redirect(base_url('user/change_password'));
             }
         }

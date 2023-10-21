@@ -201,8 +201,7 @@
         }
 
         .box .card h3 {
-            color: #593f86
-;
+            color: #593f86;
             width: 35%;
         }
 

@@ -124,13 +124,6 @@
         color: #16a34a;
     }
 
-    .aksi button {
-        font-size: 1.5em;
-        border: none;
-        color: #dc2626;
-        background: transparent;
-    }
-
     .style {
         z-index: 20;
     }
@@ -196,13 +189,6 @@
         .aksi a:nth-child(2) {
             color: #16a34a;
         }
-
-        .aksi button {
-            font-size: 1.5em;
-            border: none;
-            color: #dc2626;
-            background: transparent;
-        }
     }
 </style>
 
@@ -247,7 +233,6 @@
                                         <?php else : ?>
                                             <a href="" style="cursor:default; color: #4b5563;"><i class="fas fa-home"></i></a>
                                         <?php endif ?>
-                                        <button type="button" onclick="hapus(<?php echo $row->id ?>)"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

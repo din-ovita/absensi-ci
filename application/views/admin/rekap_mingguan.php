@@ -41,8 +41,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #593f86
-;
+        background: #593f86;
         padding: 0.75rem 1rem;
     }
 
@@ -84,12 +83,11 @@
     section .card2 table tbody tr td {
         font-size: 0.8em;
     }
-    
+
     form input {
         padding: 0.5rem;
         background: #f4f4f4;
-        border: 1px solid #593f86
-;
+        border: 1px solid #593f86;
         margin-top: 0.5rem;
     }
 
@@ -106,7 +104,7 @@
     .export {
         margin: 1rem 1rem 0 1rem;
     }
-    
+
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -151,8 +149,7 @@
         form input {
             padding: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #593f86
-;
+            border: 1px solid #593f86;
             margin-top: 0.5rem;
         }
 

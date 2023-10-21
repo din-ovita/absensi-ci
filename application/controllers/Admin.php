@@ -675,4 +675,29 @@ class Admin extends CI_Controller
         $writer = new Xlsx($spreadsheet);
         $writer->save('php://output');
     }
+
+    // delete karyawan
+    public function delete_karyawan($id)
+    {
+        $hapus = $this->m_user->delete('user', 'id', $id);
+        if ($hapus) {
+            $this->session->set_flashdata('sukses', 'Berhasil..');
+            redirect(base_url('admin/data_karyawan'));
+        } else {
+            $this->session->set_flashdata('error', 'gagal..');
+            redirect(base_url('admin/data_karyawan'));
+        }
+    }
+
+    public function detail_user($id) {
+        $data = ['menu' => 'table'];
+        $data1 = ['id' => $this->session->userdata('id')];
+        $query = $this->m_user->cek('user', $data1);
+        $data['user'] = $query->result();
+        
+        $data['karyawan'] = $this->m_user->cek('user', ['id' => $id])->result();
+
+        $data['absensi'] = $this->m_user->get_data('absensi', ['id_karyawan' => $id])->result();
+        $this->load->view('admin/detail_user', $data);
+    }
 }

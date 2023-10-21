@@ -172,7 +172,7 @@
             <div class="container">
                 <h2>Register Admin</h2>
                 <p>Create an Account</p>
-                <form action="<?php echo base_url('auth/aksi_register_admin') ?>" enctype="multipart/form-data" method="post">
+                <form action="<?php echo base_url('auth/aksi_register_admin') ?>" enctype="multipart/form-data" method="post" autocomplete="off">
                     <div class="input-group">
                         <input type="text" required name="username">
                         <span for="">Username</span>
