@@ -65,6 +65,9 @@ class Admin extends CI_Controller
         $query = $this->m_user->cek('user', $data1);
         $data['user'] = $query->result();
 
+        $data['keyword'] = $this->input->get('keyword');
+        $data['search_result'] = $this->m_user->search($data['keyword']);
+
         $this->load->view('admin/data_karyawan', $data);
     }
 
@@ -106,11 +109,31 @@ class Admin extends CI_Controller
     }
 
     // halaman rekap bulanan
-    public function monthly_rekap()
+    public function monthly_rekap($page = 1)
     {
         $data = ['menu' => 'monthly_rekap'];
         $bulan = $this->input->post('month');
-        $data['absensi'] = $this->m_user->getbulanan($bulan);
+        // $data['absensi'] = $this->m_user->getbulanan($bulan);
+
+        $per_page = 10;
+
+        $data['absensi'] = $this->m_user->get_item_where($per_page, $per_page * ($page - 1), $bulan);
+
+        $total_rows = $this->m_user->count_item_where($bulan);
+        // var_dump($data['absensi']);
+        $config['base_url'] = base_url('admin/monthly_rekap');
+        $config['total_rows'] = $total_rows;
+        $config['per_page'] = $per_page;
+        $config['uri_segment'] = 2;
+        $config['num_links'] = 2;
+        $config['use_page_numbers'] = TRUE;
+        $config['full_tag_open'] = '<div class="pagination">';
+        $config['full_tag_close'] = '</div>';
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data['pagination_links'] = $this->pagination->create_links();
 
         $data1 = ['id' => $this->session->userdata('id')];
         $query = $this->m_user->cek('user', $data1);
@@ -689,15 +712,153 @@ class Admin extends CI_Controller
         }
     }
 
-    public function detail_user($id) {
+    // halaman detail user
+    public function detail_user($id)
+    {
         $data = ['menu' => 'table'];
         $data1 = ['id' => $this->session->userdata('id')];
         $query = $this->m_user->cek('user', $data1);
         $data['user'] = $query->result();
-        
+
         $data['karyawan'] = $this->m_user->cek('user', ['id' => $id])->result();
 
         $data['absensi'] = $this->m_user->get_data('absensi', ['id_karyawan' => $id])->result();
         $this->load->view('admin/detail_user', $data);
+    }
+
+    // export history absent karyawan
+    public function export_absensi_by_karyawan($id)
+    {
+        require_once FCPATH . 'vendor/autoload.php';
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $style_col = [
+            'font' => ['bold' => true],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            ]
+        ];
+
+        $style_row = [
+            'alignment' => [
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+            ],
+            'borders' => [
+                'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            ]
+        ];
+
+        $query = $this->m_user->get_by_id('user', $id)->row_array();
+
+        $sheet->setCellValue('A1', "HISTORY ABSENT EMPLOYEE : " . $query['nama_depan'] . " " . $query['nama_belakang']  . "");
+        $sheet->mergeCells('A1:G1');
+        $sheet->getStyle('A1')->getFont()->setBold(true);
+
+        $sheet->setCellValue('A3', "NO");
+        $sheet->setCellValue('B3', "DATE");
+        $sheet->setCellValue('C3', "ENTRY TIME");
+        $sheet->setCellValue('D3', "DAILY ACTIVITIES");
+        $sheet->setCellValue('E3', "HOME TIME");
+        $sheet->setCellValue('F3', "PERMISSION");
+        $sheet->setCellValue('G3', "STATUS");
+
+        $sheet->getStyle('A3')->applyFromArray($style_col);
+        $sheet->getStyle('B3')->applyFromArray($style_col);
+        $sheet->getStyle('C3')->applyFromArray($style_col);
+        $sheet->getStyle('D3')->applyFromArray($style_col);
+        $sheet->getStyle('E3')->applyFromArray($style_col);
+        $sheet->getStyle('F3')->applyFromArray($style_col);
+        $sheet->getStyle('G3')->applyFromArray($style_col);
+
+        $absensi = $this->m_user->get_data('absensi', ['id_karyawan' => $id])->result();
+
+        $no = 1;
+        $numrow = 4;
+
+        foreach ($absensi as $data) {
+            $sheet->setCellValue('A' . $numrow, $no);
+            $sheet->setCellValue('B' . $numrow, $data->date);
+            $sheet->setCellValue('C' . $numrow, $data->jam_masuk);
+            $sheet->setCellValue('D' . $numrow, $data->kegiatan);
+            $sheet->setCellValue('E' . $numrow, $data->jam_pulang);
+            $sheet->setCellValue('F' . $numrow, $data->keterangan_izin);
+            $sheet->setCellValue('G' . $numrow, $data->status);
+
+            $sheet->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('F' . $numrow)->applyFromArray($style_row);
+            $sheet->getStyle('G' . $numrow)->applyFromArray($style_row);
+
+            $no++;
+            $numrow++;
+        }
+
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(25);
+        $sheet->getColumnDimension('C')->setWidth(25);
+        $sheet->getColumnDimension('D')->setWidth(20);
+        $sheet->getColumnDimension('E')->setWidth(30);
+        $sheet->getColumnDimension('F')->setWidth(30);
+        $sheet->getColumnDimension('G')->setWidth(30);
+
+        $sheet->getDefaultRowDimension()->setRowHeight(-1);
+
+        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+
+        $sheet->setTitle('HISTORY ABSENT EMPLOYEE');
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="history_absent_' . $query['nama_depan'] . '_' . $query['nama_belakang'] . '.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+    }
+
+    public function import_karyawan()
+    {
+        require_once FCPATH . 'vendor/autoload.php';
+        if (isset($_FILES["file"]["name"])) {
+            $path = $_FILES["file"]["tmp_name"];
+            $object = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
+            foreach ($object->getWorksheetIterator() as $worksheet) {
+                $hightestRow = $worksheet->getHighestRow();
+                $hightestColumn = $worksheet->getHighestColumn();
+                for ($row = 2; $row <= $hightestRow; $row++) {
+                    $username = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $email = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $nama_depan = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $nama_belakang = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+
+                    // $get_by_id_kelas = $this->m_model->get_by_kelas($tingkat, $jurusan);
+                    // echo $get_by_id_kelas;
+                    $data = array(
+                        'username' => $username,
+                        'email' => $email,
+                        'nama_depan' => $nama_depan,
+                        'nama_belakang' => $get_by_nama_belakang,
+                        'image' => 'user_picture.jpg',
+                        'password' => 'preSent12'
+                    );
+                    $this->m_user->tambah_data('siswa', $data);
+                }
+            }
+            redirect(base_url('admin/data_karyawan'));
+        }
     }
 }

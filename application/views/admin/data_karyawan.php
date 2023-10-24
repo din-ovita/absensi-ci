@@ -27,17 +27,17 @@
         z-index: 10;
     }
 
-    section .card {
+    section .box {
         width: 100%;
         background: #fff;
         filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
     }
 
-    section .card h1 {
+    section .box h1 {
         color: #fff;
     }
 
-    section .card .header {
+    section .box .header {
         background: #593f86;
         padding: 0.75rem 1rem;
         display: flex;
@@ -124,7 +124,7 @@
             font-size: 0.9em;
         }
 
-        section .card h1 {
+        section .box h1 {
             color: #fff;
         }
 
@@ -133,7 +133,7 @@
             height: 4rem;
         }
 
-        section .card .header {
+        section .box .header {
             padding: 1rem 2rem;
         }
 
@@ -201,7 +201,7 @@
         <?php $this->load->view('style/navbar') ?>
     </div>
     <section>
-        <div class="card">
+        <div class="box">
             <div class="header">
                 <h1>Employee Data</h1>
                 <button onclick="export_karyawan()">Export</button>

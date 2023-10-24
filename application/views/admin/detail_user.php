@@ -138,6 +138,15 @@
         cursor: pointer;
     }
 
+    button.export {
+        color: #fff;
+        background: #a568cc;
+        border: none;
+        margin-left: 1rem;
+        padding: 0.5rem 1.5rem;
+        font-size: 1em;
+    }
+
     @media (min-width: 1200px) {
         section {
             margin-left: 15rem;
@@ -266,13 +275,15 @@
                             <hr>
                         </div>
                     </div>
-                    <h2>History Absent Employee</h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2>History Absent Employee</h2>
+                        <button onclick="export_karyawan(<?php echo $row->id ?>)" class="export">Export</button>
+                    </div>
                     <div class="absent">
                         <table>
                             <thead>
                                 <tr>
                                     <th style="width: 5%;">No </th>
-                                    <th>Name</th>
                                     <th>Date</th>
                                     <th>Entry Time</th>
                                     <th>Daily Activities</th>
@@ -287,7 +298,6 @@
                                     foreach ($absensi as $row) : $no++ ?>
                                         <tr>
                                             <td style="text-align: center;"><?php echo $no ?> </td>
-                                            <td><?php echo name($row->id_karyawan) ?></td>
                                             <td><?php echo $row->date ?></td>
                                             <td><?php echo $row->jam_masuk ?></td>
                                             <td><?php echo $row->kegiatan ?></td>
@@ -318,6 +328,10 @@
         // kembali ke halaman sebelumnya
         function kembali() {
             window.history.go(-1);
+        }
+
+        function export_karyawan(id) {
+            window.location.href = "<?php echo base_url('admin/export_absensi_by_karyawan') ?>" + "/" + id;
         }
     </script>
 

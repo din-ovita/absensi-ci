@@ -301,10 +301,13 @@ class User extends CI_Controller
 
         $data1 = ['id' => $this->session->userdata('id')];
         $query = $this->m_user->cek('user', $data1);
-        $user = $query->result();
+        $user = $query->row_array();
+
+        // echo md5($old_password);
+        // echo $user['password'];
 
         if (!empty($new_password)) {
-            if ($old_password === md5($user->password)) {
+            if (md5($old_password) === $user['password']) {
                 if ($new_password === $confirm_password) {
                     $data['password'] = md5($new_password);
                 } else {

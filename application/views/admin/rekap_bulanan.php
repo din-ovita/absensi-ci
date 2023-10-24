@@ -233,7 +233,9 @@
                             <?php endif ?>
                         </tbody>
                     </table>
-                    
+                    <div class="pagination">
+                        <?php echo $pagination_links; ?>
+                    </div>
                 </div>
             </div>
         </div>

@@ -132,8 +132,38 @@ class M_user extends CI_Model
         return $query->result();
     }
 
-    public function count_item( $table)
+    public function count_item($table)
     {
         return $this->db->get($table)->num_rows();
+    }
+
+    public function get_item_where($limit, $offset, $bulan)
+    {
+        $this->db->limit($limit, $offset);
+        $this->db->from('absensi');
+        $this->db->where("DATE_FORMAT(absensi.date, '%Y-%m') =", $bulan);
+        $db = $this->db->get();
+        $result = $db->result();
+        return $result;
+    }
+
+    public function count_item_where($bulan)
+    {
+        $this->db->from('absensi');
+        $this->db->where("DATE_FORMAT(absensi.date, '%Y-%m') =", $bulan);
+        $db = $this->db->get();
+        $result = $db->num_rows();
+        return $result;
+    }
+
+    public function search($keyword)
+    {
+        if (!$keyword) {
+            return null;
+        }
+        $this->db->like('nama_depan', $keyword);
+        $this->db->or_like('nama_belakang', $keyword);
+        $query = $this->db->get('user');
+        return $query->result();
     }
 }
