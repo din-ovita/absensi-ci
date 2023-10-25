@@ -833,31 +833,29 @@ class Admin extends CI_Controller
     public function import_karyawan()
     {
         require_once FCPATH . 'vendor/autoload.php';
-        if (isset($_FILES["file"]["name"])) {
-            $path = $_FILES["file"]["tmp_name"];
+        if (isset($_FILES["fileExcel"]["name"])) {
+            $path = $_FILES["fileExcel"]["tmp_name"];
             $object = \PhpOffice\PhpSpreadsheet\IOFactory::load($path);
             foreach ($object->getWorksheetIterator() as $worksheet) {
-                $hightestRow = $worksheet->getHighestRow();
-                $hightestColumn = $worksheet->getHighestColumn();
-                for ($row = 2; $row <= $hightestRow; $row++) {
-                    $username = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                    $email = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                    $nama_depan = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                    $nama_belakang = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-
-                    // $get_by_id_kelas = $this->m_model->get_by_kelas($tingkat, $jurusan);
-                    // echo $get_by_id_kelas;
-                    $data = array(
+                $highestRow = $worksheet->getHighestRow();
+                for ($row = 4; $row <= $highestRow; $row++) {
+                    $username = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $email = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $nama_depan = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $nama_belakang = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $temp_data[] = array(
                         'username' => $username,
                         'email' => $email,
-                        'nama_depan' => $nama_depan,
-                        'nama_belakang' => $get_by_nama_belakang,
+                        'nama_depan'    => $nama_depan,
+                        'nama_belakang'    => $nama_belakang,
                         'image' => 'user_picture.jpg',
-                        'password' => 'preSent12'
+                        'password' => md5('preSent12'),
+                        'role' => 'karyawan'
                     );
-                    $this->m_user->tambah_data('siswa', $data);
                 }
             }
+            $this->m_user->insert($temp_data);
+            $this->session->set_flashdata('sukses', 'berhasil');
             redirect(base_url('admin/data_karyawan'));
         }
     }

@@ -303,9 +303,6 @@ class User extends CI_Controller
         $query = $this->m_user->cek('user', $data1);
         $user = $query->row_array();
 
-        // echo md5($old_password);
-        // echo $user['password'];
-
         if (!empty($new_password)) {
             if (md5($old_password) === $user['password']) {
                 if ($new_password === $confirm_password) {

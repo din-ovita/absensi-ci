@@ -166,4 +166,13 @@ class M_user extends CI_Model
         $query = $this->db->get('user');
         return $query->result();
     }
+
+    public function insert($data)
+    {
+        $insert = $this->db->insert_batch('user', $data);
+        if ($insert) {
+            return true;
+        }
+    }
+
 }

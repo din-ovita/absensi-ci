@@ -137,6 +137,34 @@
             padding: 1rem 2rem;
         }
 
+        form {
+            margin: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        form button {
+            margin: 0;
+        }
+
+        form input {
+            padding: 0.4rem 0.5rem;
+            background: #f4f4f4;
+            border: 1px solid #593f86;
+        }
+
+        form input:focus {
+            outline: 2px solid #593f86;
+        }
+
+        form a{
+            text-decoration: none;
+            background-color: #a568cc;
+            color: #fff;
+            padding: 0.5rem 1rem;
+        }
+
     }
 
     .pagination {
@@ -170,7 +198,7 @@
         z-index: 20;
     }
 
-    .aksi{
+    .aksi {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -206,6 +234,13 @@
                 <h1>Employee Data</h1>
                 <button onclick="export_karyawan()">Export</button>
             </div>
+            <form action="<?php echo base_url('admin/import_karyawan')?>" enctype="multipart/form-data" method="post">
+                <a href="<?php echo base_url('images/format_employee.xlsx') ?>">Download Format</a>
+                <div>
+                    <input type="file" name="fileExcel">
+                    <button type="submit">Upload</button>
+                </div>
+            </form>
             <div class="card2">
                 <table>
                     <thead>
@@ -253,7 +288,6 @@
         function export_karyawan() {
             window.location.href = '<?php echo base_url('admin/export_karyawan') ?>';
         }
-
         function hapus(id) {
             Swal.fire({
                 title: 'Are you sure?',
