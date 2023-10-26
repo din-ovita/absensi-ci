@@ -8,8 +8,7 @@
         position: fixed;
         bottom: 0;
         width: 100%;
-        background: #593f86
-;
+        background: #593f86;
         height: 5rem;
     }
 
@@ -27,8 +26,7 @@
     }
 
     nav ul li.active {
-        background: #593f86
-;
+        background: #593f86;
         width: 50px;
         height: 50px;
         border: 6px solid #fff;
@@ -87,8 +85,7 @@
             bottom: 0;
             width: 15rem;
             height: 100%;
-            background: #593f86
-;
+            background: #593f86;
         }
 
         nav ul {
@@ -126,8 +123,7 @@
         }
 
         nav ul li.active a {
-            color: #593f86
-;
+            color: #593f86;
         }
 
         nav ul li a i {

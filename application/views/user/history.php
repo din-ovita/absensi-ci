@@ -34,8 +34,7 @@
 
     section .card h1 {
         color: #fff;
-        background: #593f86
-;
+        background: #593f86;
         padding: 0.75rem 1rem;
     }
 
@@ -165,8 +164,7 @@
 
         section .card h1 {
             color: #fff;
-            background: #593f86
-;
+            background: #593f86;
             padding: 1rem 2rem;
         }
 
@@ -227,7 +225,8 @@
                                     <td><?php echo $row->keterangan_izin ?></td>
                                     <td class="aksi">
                                         <a href="<?php echo base_url('user/validasi_edit') ?>"><i class="fas fa-edit"></i></a>
-                                        <?php date_default_timezone_set('Asia/Jakarta'); $tgl = date('Y-m-d')?>
+                                        <?php date_default_timezone_set('Asia/Jakarta');
+                                        $tgl = date('Y-m-d') ?>
                                         <?php if (empty(pulang($row->id)) && izin($row->id) == '-' && tgl($row->id) == $tgl) : ?>
                                             <a href="<?php echo base_url('user/pulang') ?>"><i class="fas fa-home"></i></a>
                                         <?php else : ?>

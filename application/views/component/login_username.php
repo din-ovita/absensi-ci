@@ -33,8 +33,7 @@
     }
 
     .box {
-        background: #593f86
-;
+        background: #593f86;
         padding: 30px;
         border-top-right-radius: 50px;
         border-bottom-left-radius: 50px;
@@ -169,8 +168,7 @@
         }
 
         .box {
-            background: #593f86
-;
+            background: #593f86;
             padding: 30px 50px;
             border-top-right-radius: 50px;
             border-bottom-left-radius: 50px;
@@ -303,7 +301,7 @@
             <div class="container">
                 <h2>Login</h2>
                 <p>Sign in to continue</p>
-                <form action="<?php echo base_url('auth/aksi_login_username') ?>" enctype="multipart/form-data" method="post"  autocomplete="off">
+                <form action="<?php echo base_url('auth/aksi_login_username') ?>" enctype="multipart/form-data" method="post" autocomplete="off">
                     <div class="input-group">
                         <input type="text" required name="username">
                         <span for="">Username</span>
@@ -318,7 +316,7 @@
                         </div>
                     </div>
                     <div class="login_username">
-                        <a href="<?php echo base_url('auth/login') ?>">Login with email</a>
+                        <a href="<?php echo base_url('auth') ?>">Login with email</a>
                     </div>
                     <div class="sign-in">
                         <button type="submit">Sign In</button>
@@ -328,7 +326,7 @@
             </div>
         </div>
     </section>
-    
+
     <?php if ($this->session->flashdata('error_message')) : ?>
         <script>
             Swal.fire({

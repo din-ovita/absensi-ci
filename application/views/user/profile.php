@@ -19,8 +19,7 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        background: #593f86
-;
+        background: #593f86;
         color: #fff;
         padding: 3.5rem 2rem;
         border-bottom-left-radius: 6rem;
@@ -89,8 +88,7 @@
     }
 
     .box .card h3 {
-        color: #593f86
-;
+        color: #593f86;
         width: 35%;
         font-size: 1.05em;
     }
@@ -129,8 +127,7 @@
             position: relative;
             display: flex;
             flex-direction: row;
-            background: #593f86
-;
+            background: #593f86;
             color: #fff;
             padding: 2rem 7rem 4rem 7rem;
             border-bottom-left-radius: 5rem;

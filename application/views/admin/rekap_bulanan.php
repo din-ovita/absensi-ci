@@ -41,8 +41,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #593f86
-;
+        background: #593f86;
         padding: 0.75rem 1rem;
     }
 
@@ -124,8 +123,7 @@
         form input {
             padding: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #593f86
-;
+            border: 1px solid #593f86;
             margin-top: 0.5rem;
         }
 
@@ -156,8 +154,7 @@
     form input {
         padding: 0.5rem;
         background: #f4f4f4;
-        border: 1px solid #593f86
-;
+        border: 1px solid #593f86;
         margin-top: 0.5rem;
     }
 
@@ -233,9 +230,6 @@
                             <?php endif ?>
                         </tbody>
                     </table>
-                    <div class="pagination">
-                        <?php echo $pagination_links; ?>
-                    </div>
                 </div>
             </div>
         </div>

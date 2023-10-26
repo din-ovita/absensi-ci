@@ -65,9 +65,6 @@ class Admin extends CI_Controller
         $query = $this->m_user->cek('user', $data1);
         $data['user'] = $query->result();
 
-        $data['keyword'] = $this->input->get('keyword');
-        $data['search_result'] = $this->m_user->search($data['keyword']);
-
         $this->load->view('admin/data_karyawan', $data);
     }
 
@@ -109,31 +106,12 @@ class Admin extends CI_Controller
     }
 
     // halaman rekap bulanan
-    public function monthly_rekap($page = 1)
+    public function monthly_rekap()
     {
         $data = ['menu' => 'monthly_rekap'];
         $bulan = $this->input->post('month');
-        // $data['absensi'] = $this->m_user->getbulanan($bulan);
 
-        $per_page = 10;
-
-        $data['absensi'] = $this->m_user->get_item_where($per_page, $per_page * ($page - 1), $bulan);
-
-        $total_rows = $this->m_user->count_item_where($bulan);
-        // var_dump($data['absensi']);
-        $config['base_url'] = base_url('admin/monthly_rekap');
-        $config['total_rows'] = $total_rows;
-        $config['per_page'] = $per_page;
-        $config['uri_segment'] = 2;
-        $config['num_links'] = 2;
-        $config['use_page_numbers'] = TRUE;
-        $config['full_tag_open'] = '<div class="pagination">';
-        $config['full_tag_close'] = '</div>';
-
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
-        $data['pagination_links'] = $this->pagination->create_links();
+        $data['absensi'] = $this->m_user->getbulanan($bulan);
 
         $data1 = ['id' => $this->session->userdata('id')];
         $query = $this->m_user->cek('user', $data1);
@@ -704,7 +682,6 @@ class Admin extends CI_Controller
     {
         $hapus = $this->m_user->delete('user', 'id', $id);
         if ($hapus) {
-            $this->session->set_flashdata('sukses', 'Berhasil..');
             redirect(base_url('admin/data_karyawan'));
         } else {
             $this->session->set_flashdata('error', 'gagal..');
@@ -830,6 +807,7 @@ class Admin extends CI_Controller
         $writer->save('php://output');
     }
 
+    // import karyawan
     public function import_karyawan()
     {
         require_once FCPATH . 'vendor/autoload.php';
@@ -855,7 +833,7 @@ class Admin extends CI_Controller
                 }
             }
             $this->m_user->insert($temp_data);
-            $this->session->set_flashdata('sukses', 'berhasil');
+            $this->session->set_flashdata('sukses', 'Employee data added successfully');
             redirect(base_url('admin/data_karyawan'));
         }
     }

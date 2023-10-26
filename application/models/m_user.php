@@ -95,6 +95,7 @@ class M_user extends CI_Model
         return $result;
     }
 
+    // get absensi by month 
     public function getbulanan($bulan)
     {
         $this->db->from('absensi');
@@ -104,6 +105,7 @@ class M_user extends CI_Model
         return $result;
     }
 
+    // get absensi by day
     public function getharian($hari)
     {
         $this->db->from('absensi');
@@ -113,6 +115,7 @@ class M_user extends CI_Model
         return $result;
     }
 
+    // for pagination
     public function get_items($limit, $offset, $role)
     {
         $this->db->limit($limit, $offset);
@@ -125,6 +128,7 @@ class M_user extends CI_Model
         return $this->db->where('role', $role)->get('user')->num_rows();
     }
 
+    // for pagination
     public function get_item($limit, $offset, $table)
     {
         $this->db->limit($limit, $offset);
@@ -156,17 +160,7 @@ class M_user extends CI_Model
         return $result;
     }
 
-    public function search($keyword)
-    {
-        if (!$keyword) {
-            return null;
-        }
-        $this->db->like('nama_depan', $keyword);
-        $this->db->or_like('nama_belakang', $keyword);
-        $query = $this->db->get('user');
-        return $query->result();
-    }
-
+    // add with excel
     public function insert($data)
     {
         $insert = $this->db->insert_batch('user', $data);

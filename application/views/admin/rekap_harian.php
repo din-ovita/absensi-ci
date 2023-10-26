@@ -41,8 +41,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #593f86
-;
+        background: #593f86;
         padding: 1rem;
     }
 
@@ -85,12 +84,11 @@
         font-size: 0.8em;
     }
 
-    
+
     form input {
         padding: 0.5rem;
         background: #f4f4f4;
-        border: 1px solid #593f86
-;
+        border: 1px solid #593f86;
         margin-top: 0.5rem;
     }
 
@@ -147,8 +145,7 @@
         form input {
             padding: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #593f86
-;
+            border: 1px solid #593f86;
             margin-top: 0.5rem;
         }
 

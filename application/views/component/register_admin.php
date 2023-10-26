@@ -29,8 +29,7 @@
     }
 
     .box {
-        background: #593f86
-;
+        background: #593f86;
         padding: 30px;
         border-top-left-radius: 50px;
         margin: 1rem;
@@ -151,8 +150,7 @@
         }
 
         .box {
-            background: #593f86
-;
+            background: #593f86;
             padding: 30px 50px;
             margin: auto;
             border-top-left-radius: 50px;
@@ -205,7 +203,7 @@
                     <div class="sign-up">
                         <button type="submit">Sign Up</button>
                     </div>
-                    <p>Already have an account? <a href="<?php echo base_url('auth/login') ?>">Login</a></p>
+                    <p>Already have an account? <a href="<?php echo base_url('auth') ?>">Login</a></p>
                 </form>
             </div>
         </div>

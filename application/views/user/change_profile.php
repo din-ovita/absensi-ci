@@ -19,8 +19,7 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        background: #593f86
-;
+        background: #593f86;
         color: #fff;
         padding: 3.5rem 2rem;
         border-bottom-left-radius: 6rem;
@@ -94,8 +93,7 @@
     }
 
     .card label {
-        color: #593f86
-;
+        color: #593f86;
     }
 
     .card input {
@@ -105,13 +103,11 @@
         padding: 0.2rem 0.5rem;
         margin-top: 0.5rem;
         background: #f4f4f4;
-        border: 1px solid #593f86
-;
+        border: 1px solid #593f86;
     }
 
     .card input:focus {
-        outline: 2px solid #593f86
-;
+        outline: 2px solid #593f86;
     }
 
     .img input {
@@ -133,8 +129,7 @@
     .button button {
         padding: 0.5rem 3rem;
         color: #fff;
-        background: #593f86
-;
+        background: #593f86;
         border: none;
         font-size: 1em;
         font-weight: 500;
@@ -147,8 +142,7 @@
             position: relative;
             display: flex;
             flex-direction: row;
-            background: #593f86
-;
+            background: #593f86;
             color: #fff;
             padding: 2rem 7rem 4rem 7rem;
             border-bottom-left-radius: 5rem;
@@ -224,8 +218,7 @@
         }
 
         .card label {
-            color: #593f86
-;
+            color: #593f86;
         }
 
         .card input {
@@ -235,13 +228,11 @@
             padding: 0.2rem 0.5rem;
             margin-top: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #593f86
-;
+            border: 1px solid #593f86;
         }
 
         .card input:focus {
-            outline: 2px solid #593f86
-;
+            outline: 2px solid #593f86;
         }
 
         .img input {
@@ -263,8 +254,7 @@
         .button button {
             padding: 0.8rem 5rem;
             color: #fff;
-            background: #593f86
-;
+            background: #593f86;
             border: none;
             font-size: 1em;
             font-weight: 500;

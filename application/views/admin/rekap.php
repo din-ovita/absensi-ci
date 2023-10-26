@@ -69,8 +69,7 @@
             width: 93%;
             padding: 0.5rem;
             background: #f4f4f4;
-            border: 1px solid #593f86
-;
+            border: 1px solid #593f86;
             margin-top: 0.5rem;
         }
 
@@ -79,15 +78,13 @@
         }
 
         section .box .card form input:focus {
-            outline: 2px solid #593f86
-;
+            outline: 2px solid #593f86;
         }
 
         section .box .card form button {
             width: 100%;
             color: #fff;
-            background: #593f86
-;
+            background: #593f86;
             border: none;
             margin: 1rem 0;
             padding: 0.5rem 0;
@@ -108,8 +105,7 @@
         .card2 button {
             text-decoration: none;
             color: #fff;
-            background: #593f86
-;
+            background: #593f86;
             padding: 0.5rem 4rem;
             font-size: 1em;
             width: 100%;

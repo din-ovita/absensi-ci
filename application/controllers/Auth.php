@@ -9,15 +9,8 @@ class Auth extends CI_Controller
 		$this->load->model('m_user');
 	}
 
-	// halaman home
-	public function index()
-	{
-		$data['title'] = 'Home Page';
-		$this->load->view('component/home', $data);
-	}
-
 	// halaman login email
-	public function login()
+	public function index()
 	{
 		$this->load->view('component/login');
 	}
@@ -71,7 +64,7 @@ class Auth extends CI_Controller
 			redirect(base_url('auth/register'));
 		} elseif (strlen($passwordk) >= 8 && empty($result)) { // validasi jika password kurang dari 8 karakter
 			$this->m_user->add('user', $data);
-			redirect(base_url('auth/login'));
+			redirect(base_url('auth'));
 		} else {
 			$this->session->set_flashdata('error_message', 'Password must be at least 8 characters');
 			redirect(base_url('auth/register'));
@@ -109,7 +102,7 @@ class Auth extends CI_Controller
 			redirect(base_url('auth/register_admin'));
 		} elseif (strlen($passwordk) >= 8 && empty($result)) { // validasi jika password kurang dari 8 karakter
 			$this->m_user->add('user', $data);
-			redirect(base_url('auth/login'));
+			redirect(base_url('auth'));
 		} else {
 			$this->session->set_flashdata('error_message', 'Password must be at least 8 characters');
 			redirect(base_url('auth/register_admin'));
@@ -137,7 +130,7 @@ class Auth extends CI_Controller
 			}
 		} else {
 			$this->session->set_flashdata('error_message', 'Incorrect email or password');
-			redirect(base_url('auth/login'));
+			redirect(base_url('auth'));
 		}
 	}
 
@@ -168,6 +161,6 @@ class Auth extends CI_Controller
 	function logout()
 	{
 		$this->session->sess_destroy();
-		redirect(base_url('auth/login'));
+		redirect(base_url('auth'));
 	}
 }

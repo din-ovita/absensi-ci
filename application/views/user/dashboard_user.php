@@ -54,8 +54,7 @@
 
     section .box .card i {
         font-size: 4rem;
-        color: #593f86
-;
+        color: #593f86;
     }
 
     section .box2 {
@@ -131,8 +130,7 @@
 
         section .box .card i {
             font-size: 5rem;
-            color: #593f86
-;
+            color: #593f86;
         }
 
         section .card2 {
@@ -166,8 +164,7 @@
 
         section .card h1 {
             color: #fff;
-            background: #593f86
-;
+            background: #593f86;
             padding: 1rem 2rem;
         }
 

@@ -159,8 +159,7 @@
 
     @media (min-width: 1200px) {
         .box {
-            background: #593f86
-;
+            background: #593f86;
             padding: 30px 50px;
             border-top-right-radius: 50px;
         }
@@ -216,7 +215,7 @@
             });
         </script>
     <?php endif; ?>
-    
+
     <?php if ($this->session->flashdata('message')) : ?>
         <script>
             Swal.fire({

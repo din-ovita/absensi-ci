@@ -41,8 +41,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #593f86
-;
+        background: #593f86;
         padding: 0.75rem 1rem;
     }
 
@@ -112,10 +111,8 @@
 
     .pagination a:hover,
     .pagination strong {
-        border: 1px solid #593f86
-;
-        background-color: #593f86
-;
+        border: 1px solid #593f86;
+        background-color: #593f86;
         color: white;
     }
 
